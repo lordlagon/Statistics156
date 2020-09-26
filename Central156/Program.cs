@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -11,7 +13,7 @@ namespace Central156
     public class Program
     {
         public string BaseUrl = "http://dadosabertos.c3sl.ufpr.br/curitiba/156/";
-        public string DiretorioLocal = @"C:/Sistemas/156/csv/";
+        public string DiretorioLocal = @"C:/Sistemas/TCC/156/csv/";
 
         public static void Main(string[] args)
         {
@@ -22,27 +24,39 @@ namespace Central156
         }
         public void StartDownLoad()
         {
-            var files = GetAllCSV156();
-
+            var files = GetAllCSV156().ToList();
+            var FilesDateNow = GetFileCurrent(files).ToList();
+            FilesDateNow.ForEach(f => files.Add(f));
             DownloadFile(files);
-
-
+        }
+        
+        private IEnumerable<string> GetFileCurrent(IEnumerable<string> files)
+        {
+            var newFiles = new List<string>();
+            var date = DateTime.Now.ToString("yyyy-MM");
+            if(!files.Where(w => w.Contains(date)).Any())
+            {
+                return new string[] {
+                    $"{date}-01_156_-_Base_de_Dados.csv",
+                    $"{date}-01_156_-_Historico_-_Base_de_Dados.csv"
+                };
+            }
+            return null;
         }
 
-        public async void DownloadFile(IEnumerable<string> files)
+        public void DownloadFile(IEnumerable<string> files)
         {
             using (var webClient = new WebClient())
             {
-                webClient.DownloadStringCompleted += OnGetDownloadedStringCompleted;
                 foreach (var file in files)
-                    webClient.DownloadFile(new Uri(BaseUrl + file), DiretorioLocal + file);
-
+                {
+                    var url = file.Contains("Historico") ? DiretorioLocal + "Historico/" + file :
+                              file.Contains("Dicionario") ? DiretorioLocal + "Dicionario/" + file :
+                              DiretorioLocal + "Base/" + file;
+                    if (!File.Exists(url))
+                        webClient.DownloadFile(new Uri(BaseUrl + file), url);
+                }
             }
-        }
-
-        private void OnGetDownloadedStringCompleted(object sender, DownloadStringCompletedEventArgs e)
-        {
-            Console.WriteLine("Download efetuado!");
         }
 
         public IEnumerable<string> GetAllCSV156()
