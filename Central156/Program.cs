@@ -166,6 +166,8 @@ namespace Central156
                 "2020-07-01_156_-_Historico_-_Base_de_Dados.csv",
                 "2020-08-01_156_-_Base_de_Dados.csv",
                 "2020-08-01_156_-_Historico_-_Base_de_Dados.csv",
+                "2020-09-01_156_-_Base_de_Dados.csv",
+                "2020-09-01_156_-_Historico_-_Base_de_Dados.csv",
             };
     }
 }
