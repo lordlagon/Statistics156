@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 
 namespace Central156
 {
@@ -168,6 +164,8 @@ namespace Central156
                 "2020-08-01_156_-_Historico_-_Base_de_Dados.csv",
                 "2020-09-01_156_-_Base_de_Dados.csv",
                 "2020-09-01_156_-_Historico_-_Base_de_Dados.csv",
+                "2020-10-01_156_-_Base_de_Dados.csv",
+                "2020-10-01_156_-_Historico_-_Base_de_Dados.csv",
             };
     }
 }
