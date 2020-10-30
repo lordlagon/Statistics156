@@ -13,16 +13,15 @@ namespace Central156
 
         public static void Main(string[] args)
         {
-
             var start = new Program();
             start.StartDownLoad();
-
         }
         public void StartDownLoad()
         {
             var files = GetAllCSV156().ToList();
-            var FilesDateNow = GetFileCurrent(files).ToList();
-            FilesDateNow.ForEach(f => files.Add(f));
+            var FilesDateNow = GetFileCurrent(files)?.ToList();
+            if(FilesDateNow != null)
+                FilesDateNow.ForEach(f => files.Add(f));
             DownloadFile(files);
         }
         
