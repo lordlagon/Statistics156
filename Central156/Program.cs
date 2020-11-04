@@ -148,7 +148,6 @@ namespace Central156
                 "2020-02-01_156_-_Historico_-_Base_de_Dados.csv",
                 "2020-03-01_156_-_Base_de_Dados.csv",
                 "2020-03-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2020-03-03_2019-06-01_156_-_Base_de_Dados.csv",
                 "2020-03-11_156_-_Base_de_Dados.csv",
                 "2020-03-11_156_-_Historico_-_Base_de_Dados.csv",
                 "2020-04-01_156_-_Base_de_Dados.csv",
