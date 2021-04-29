@@ -1,5 +1,4 @@
-﻿using HtmlAgilityPack;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,8 +16,6 @@ namespace Central156
         {
             var start = new Program();
             start.StartDownLoad();
-            
-
         }
 
         public string GetDirectoryListingRegexForUrl(string url)
@@ -53,17 +50,15 @@ namespace Central156
 
         public void DownloadFile(IEnumerable<string> files)
         {
-            using (var webClient = new WebClient())
+            using var webClient = new WebClient();
+
+            foreach (var file in files)
             {
-                
-                foreach (var file in files)
-                {
-                    var url = file.Contains("Historico") ? DiretorioLocal + "Historico/" + file :
-                              file.Contains("Dicionario") ? DiretorioLocal + "Dicionario/" + file :
-                              DiretorioLocal + "Base/" + file;
-                    if (!File.Exists(url))
-                        webClient.DownloadFile(new Uri(BaseUrl + file), url);
-                }
+                var url = file.Contains("Historico") ? DiretorioLocal + "Historico/" + file :
+                          file.Contains("Dicionario") ? DiretorioLocal + "Dicionario/" + file :
+                          DiretorioLocal + "Base/" + file;
+                if (!File.Exists(url))
+                    webClient.DownloadFile(new Uri(BaseUrl + file), url);
             }
         }
         public IEnumerable<string> GetAllFileNamesCSV156()
