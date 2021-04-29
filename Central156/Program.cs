@@ -1,8 +1,10 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 
 namespace Central156
 {
@@ -15,10 +17,20 @@ namespace Central156
         {
             var start = new Program();
             start.StartDownLoad();
+            
+
         }
+
+        public string GetDirectoryListingRegexForUrl(string url)
+        {
+            if (url.Equals(BaseUrl))
+                return "<a href=\".*\">(?<name>.*)</a>";
+            throw new NotSupportedException();
+        }
+        
         public void StartDownLoad()
         {
-            var files = GetAllCSV156().ToList();
+            var files = GetAllFileNamesCSV156().ToList();
             var FilesDateNow = GetFileCurrent(files)?.ToList();
             if(FilesDateNow != null)
                 FilesDateNow.ForEach(f => files.Add(f));
@@ -43,6 +55,7 @@ namespace Central156
         {
             using (var webClient = new WebClient())
             {
+                
                 foreach (var file in files)
                 {
                     var url = file.Contains("Historico") ? DiretorioLocal + "Historico/" + file :
@@ -53,117 +66,30 @@ namespace Central156
                 }
             }
         }
-
-        public IEnumerable<string> GetAllCSV156()
-            => new string[]{
-                "156_-_Base_de_Dados.csv",
-                "156_-_Dicionario_de_Dados.xlsx",
-                "156_-_Historico_-_Base_de_Dados.csv",
-                "156_-_Historico_-_Dicionario_de_Dados.xlsx",
-                "2015-11-26_156_-_Dicionario_de_Dados.xlsx",
-                "2016-02-17_156_-_Historico_-_Dicionario_de_Dados.xlsx",
-                "2016-09-01_156_-_Base_de_Dados.csv",
-                "2016-09-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2016-10-01_156_-_Base_de_Dados.csv",
-                "2016-10-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2016-11-01_156_-_Base_de_Dados.csv",
-                "2016-11-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2016-12-01_156_-_Base_de_Dados.csv",
-                "2016-12-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2017-01-01_156_-_Base_de_Dados.csv",
-                "2017-01-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2017-02-01_156_-_Base_de_Dados.csv",
-                "2017-02-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2017-03-01_156_-_Base_de_Dados.csv",
-                "2017-03-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2017-04-01_156_-_Base_de_Dados.csv",
-                "2017-04-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2017-06-01_156_-_Base_de_Dados.csv",
-                "2017-06-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2017-07-01_156_-_Base_de_Dados.csv",
-                "2017-07-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2017-08-01_156_-_Base_de_Dados.csv",
-                "2017-08-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2017-09-01_156_-_Base_de_Dados.csv",
-                "2017-09-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2017-10-01_156_-_Base_de_Dados.csv",
-                "2017-10-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2017-11-01_156_-_Base_de_Dados.csv",
-                "2017-11-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2017-12-01_156_-_Base_de_Dados.csv",
-                "2017-12-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2018-01-01_156_-_Base_de_Dados.csv",
-                "2018-01-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2018-02-01_156_-_Base_de_Dados.csv",
-                "2018-02-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2018-03-01_156_-_Base_de_Dados.csv",
-                "2018-03-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2018-04-01_156_-_Base_de_Dados.csv",
-                "2018-04-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2018-04-26_156_-_Base_de_Dados.csv",
-                "2018-04-26_156_-_Historico_-_Base_de_Dados.csv",
-                "2018-05-01_156_-_Base_de_Dados.csv",
-                "2018-05-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2018-06-01_156_-_Base_de_Dados.csv",
-                "2018-06-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2018-07-01_156_-_Base_de_Dados.csv",
-                "2018-07-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2018-08-01_156_-_Base_de_Dados.csv",
-                "2018-08-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2018-09-01_156_-_Base_de_Dados.csv",
-                "2018-09-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2018-10-01_156_-_Base_de_Dados.csv",
-                "2018-10-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2018-11-01_156_-_Base_de_Dados.csv",
-                "2018-11-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2018-12-01_156_-_Base_de_Dados.csv",
-                "2018-12-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2019-01-01_156_-_Base_de_Dados.csv",
-                "2019-01-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2019-02-01_156_-_Base_de_Dados.csv",
-                "2019-02-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2019-03-01_156_-_Base_de_Dados.csv",
-                "2019-03-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2019-04-01_156_-_Base_de_Dados.csv",
-                "2019-04-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2019-05-01_156_-_Base_de_Dados.csv",
-                "2019-05-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2019-06-01_156_-_Base_de_Dados.csv",
-                "2019-06-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2019-07-01_156_-_Base_de_Dados.csv",
-                "2019-07-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2019-08-01_156_-_Base_de_Dados.csv",
-                "2019-08-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2019-09-01_156_-_Base_de_Dados.csv",
-                "2019-09-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2019-10-01_156_-_Base_de_Dados.csv",
-                "2019-10-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2019-11-01_156_-_Base_de_Dados.csv",
-                "2019-11-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2019-12-01_156_-_Base_de_Dados.csv",
-                "2019-12-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2020-01-01_156_-_Base_de_Dados.csv",
-                "2020-01-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2020-02-01_156_-_Base_de_Dados.csv",
-                "2020-02-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2020-03-01_156_-_Base_de_Dados.csv",
-                "2020-03-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2020-03-11_156_-_Base_de_Dados.csv",
-                "2020-03-11_156_-_Historico_-_Base_de_Dados.csv",
-                "2020-04-01_156_-_Base_de_Dados.csv",
-                "2020-04-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2020-05-01_156_-_Base_de_Dados.csv",
-                "2020-05-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2020-06-01_156_-_Base_de_Dados.csv",
-                "2020-06-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2020-07-01_156_-_Base_de_Dados.csv",
-                "2020-07-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2020-08-01_156_-_Base_de_Dados.csv",
-                "2020-08-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2020-09-01_156_-_Base_de_Dados.csv",
-                "2020-09-01_156_-_Historico_-_Base_de_Dados.csv",
-                "2020-10-01_156_-_Base_de_Dados.csv",
-                "2020-10-01_156_-_Historico_-_Base_de_Dados.csv",
-            };
+        public IEnumerable<string> GetAllFileNamesCSV156()
+        {
+            string url = $"{BaseUrl}";
+            var names = new List<string>();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            {
+                using StreamReader reader = new StreamReader(response.GetResponseStream());
+                string html = reader.ReadToEnd();
+                Regex regex = new Regex(GetDirectoryListingRegexForUrl(url));
+                MatchCollection matches = regex.Matches(html);
+                if (matches.Count > 0)
+                {
+                    foreach (Match match in matches)
+                    {
+                        if (match.Success)
+                        {
+                            if (match.Value.Contains(".csv"))
+                                names.Add(match.Groups["name"].ToString());
+                        }
+                    }
+                }
+            }
+            return names;
+        }
     }
 }
