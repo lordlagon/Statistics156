@@ -3,4 +3,4 @@ Código criado para fazer o download automatizado dos arquivos csv da base da Ce
 
 TCC Statistics 156.
 
-Univesidade Positivo
+Universidade Positivo
