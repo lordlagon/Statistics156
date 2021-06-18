@@ -1,0 +1,19 @@
+﻿@page "/"
+@using Statistics156_Front.Data;
+@inject IJSRuntime jsRunTime;
+<h1>Hello, world!</h1>
+
+<div id="chartdiv"></div>
+
+<button class="btn btn-primary" @onclick="GeneratePieChartBlazor">Generate Pie Chart</button>
+@code{
+    CountryInfo countryInfo = new CountryInfo();
+    List<CountryInfo> countryInfos = new List<CountryInfo>();
+
+    async Task GeneratePieChartBlazor()
+    {
+        countryInfos = countryInfo.GetCountryInfos();
+        await jsRunTime.InvokeVoidAsync("GeneratePieChart", countryInfos);
+
+    }
+}
