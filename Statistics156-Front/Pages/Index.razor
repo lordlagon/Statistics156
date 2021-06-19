@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using Statistics156_Front.Data;
+@using Statistics156_Front.Services;
 @inject IJSRuntime jsRunTime;
 <h1>Hello, world!</h1>
 
@@ -9,10 +10,12 @@
 @code{
     CountryInfo countryInfo = new CountryInfo();
     List<CountryInfo> countryInfos = new List<CountryInfo>();
+    Central central = new Central();
 
     async Task GeneratePieChartBlazor()
     {
-        countryInfos = countryInfo.GetCountryInfos();
+        countryInfos = await central.GetCentralAsync();
+        //countryInfos = countryInfo.GetCountryInfos();
         await jsRunTime.InvokeVoidAsync("GeneratePieChart", countryInfos);
 
     }
