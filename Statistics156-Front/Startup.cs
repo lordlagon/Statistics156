@@ -5,13 +5,14 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Statistics156.Data;
+using Radzen;
+using Statistics156_Front.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Statistics156
+namespace Statistics156_Front
 {
     public class Startup
     {
@@ -28,6 +29,10 @@ namespace Statistics156
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddScoped<DialogService>();
+            services.AddScoped<NotificationService>();
+            services.AddScoped<TooltipService>();
+            services.AddScoped<ContextMenuService>();
             services.AddSingleton<WeatherForecastService>();
         }
 

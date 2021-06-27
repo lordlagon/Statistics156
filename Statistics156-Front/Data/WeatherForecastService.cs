@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Statistics156.Data
+namespace Statistics156_Front.Data
 {
     public class WeatherForecastService
     {

@@ -100,11 +100,7 @@ namespace Central156
                 var linha = RemoverAcentos(item);
                 if (linha.StartsWith("-------"))
                     continue;
-
-                if (linha.Contains("Unidade Regi;"))
-                { 
-                    var ssis = 8;
-                }
+                
                 if (linha.StartsWith("esta registrado no croqui 4135\t"))
                 {
                     linha = linha.Replace("\t", ",");
