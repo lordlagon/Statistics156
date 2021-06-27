@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Statistics156_Front.Data
 {
-    public class CountryInfo
+    public partial class CountryInfo
     {
         public int Id { get; set; }
         public string Name { get; set; }

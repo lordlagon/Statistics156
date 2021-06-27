@@ -13,11 +13,40 @@ namespace Statistics156_Front.Services
 
         public async Task<List<CountryInfo>> GetCentralAsync()
         {
-            var person = await "http://127.0.0.1:5000/"
-                .AppendPathSegment("api")
-                .AppendPathSegment("tasks").GetJsonAsync<List<CountryInfo>>();
-                
+            var person = await AppConfiguration.BaseUrl
+
+                .AppendPathSegment("country").GetJsonAsync<List<CountryInfo>>();
+
             return person;
+        }
+
+        public async Task<List<TipoSolicitacao>> GetTiposAsync()
+        {
+            var tipos = await AppConfiguration.BaseUrl
+                .AppendPathSegment("selecao")
+                .AppendPathSegment("tipos")
+                .GetJsonAsync<List<TipoSolicitacao>>();
+
+            return tipos;
+        }
+        public async Task<List<ConsultaPorTipo>> GetConsultaPorTiposAsync(string tipo, string mes)
+        {
+            try
+            {
+                var result = await AppConfiguration.BaseUrl
+                    .AppendPathSegment("analises")
+                    .AppendPathSegment("consulta")
+                    .AppendPathSegment(tipo)
+                    .AppendPathSegment(mes)
+                    .GetJsonAsync<List<ConsultaPorTipo>>();
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
     }
 }

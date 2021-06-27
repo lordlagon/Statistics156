@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Radzen;
 using Statistics156_Front.Data;
 using System;
 using System.Collections.Generic;
@@ -28,6 +29,10 @@ namespace Statistics156_Front
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddScoped<DialogService>();
+            services.AddScoped<NotificationService>();
+            services.AddScoped<TooltipService>();
+            services.AddScoped<ContextMenuService>();
             services.AddSingleton<WeatherForecastService>();
         }
 

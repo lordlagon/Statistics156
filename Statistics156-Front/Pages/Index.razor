@@ -2,21 +2,81 @@
 @using Statistics156_Front.Data;
 @using Statistics156_Front.Services;
 @inject IJSRuntime jsRunTime;
-<h1>Hello, world!</h1>
 
-<div id="chartdiv"></div>
+<div class="container" style="border: 1px solid red">
+    <h1>Hello, world!</h1>
 
-<button class="btn btn-primary" @onclick="GeneratePieChartBlazor">Generate Pie Chart</button>
+    <div class="row" style="border: 0px solid red; padding-bottom: 15px">
+
+        <div class="col float-left">
+            <h4 style="font-weight: bold">Tipo de Solicitacao</h4>
+            @*<RadzenDropDown @bind-Value="Tipo.Tipo" AllowClear="true" TValue="string" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowFiltering="true" Style="width:100px"
+                                    Placeholder="Select..." Data=@tipoInfos TextProperty="Tipo" ValueProperty="Tipo" Change=@(args => OnChange(args, "tipo")) />
+
+                </div>
+                <div>*@
+            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                            Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
+                            Change=@(args => OnChange(args, "tipo")) />
+        </div>
+    </div> <!-- row-->
+    @if (IsLoading)
+    {
+        <div class="row"> Loading...</div>
+    }else
+    {
+        <div id="chartdiv"></div>
+    }
+
+    <button class="btn btn-primary" @onclick="GeneratePieChartBlazor">Generate Pie Chart</button>
+</div>
 @code{
     CountryInfo countryInfo = new CountryInfo();
     List<CountryInfo> countryInfos = new List<CountryInfo>();
+    List<TipoSolicitacao> tipoInfos = new List<TipoSolicitacao>();
+    TipoSolicitacao Tipo = new TipoSolicitacao();
     Central central = new Central();
+    bool IsLoading = false;
 
+    List<ConsultaPorTipo> analiseTipo = new List<ConsultaPorTipo>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        tipoInfos = await central.GetTiposAsync();
+        await base.OnInitializedAsync();
+    }
     async Task GeneratePieChartBlazor()
     {
-        countryInfos = await central.GetCentralAsync();
-        //countryInfos = countryInfo.GetCountryInfos();
-        await jsRunTime.InvokeVoidAsync("GeneratePieChart", countryInfos);
+        await jsRunTime.InvokeVoidAsync("GenerateLineChart", analiseTipo);
 
+    }
+
+    void OnChange(object value, string name)
+    {
+
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+
+        if (str is string valor)
+        {
+            switch (name)
+            {
+                case "tipo":
+                    Tipo = tipoInfos.Where(w => w.Tipo == valor).FirstOrDefault();
+                    Console.WriteLine(Tipo.Fk_Tipo);
+                    break;
+                default:
+                    break;
+            }
+        }
+        Task.Run(async () => {
+            await GetAnalisePorTipo();
+            await GeneratePieChartBlazor();
+            }
+        ) ;
+
+    }
+    async Task GetAnalisePorTipo()
+    {
+        analiseTipo = await central.GetConsultaPorTiposAsync(Tipo.Fk_Tipo, "Jul");
     }
 }
