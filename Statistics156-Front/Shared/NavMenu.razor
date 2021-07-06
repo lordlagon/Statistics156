@@ -1,37 +1,48 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">Statistics156-Front</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
+﻿<!-- <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3 fixed-top" style="background-color: #28A745"> -->
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background-color: #f0f0f0">
+    <div class="container-fluid">
+        <label class="navbar-brand font-weight-bold text-dark " asp-page="/Index" >Statistics 156</label>
+        <button class="navbar-toggler" @onclick="ToggleNavMenu" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="@NavMenuCssClass navbar-collapse d-sm-inline-flex flex-sm-row-reverse" @onclick="CollapseNavMenu">
+            <ul class="navbar-nav flex-grow-3">
+                <li class="nav-item">
+                    <a style="color: black" class="btn " href="" Match="NavLinkMatch.All">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a style="color: black" class="btn " href="counter">Central156</a>
+                </li>
+                <li class="nav-item">
+                    <a style="color: black" class="btn " href="fetchdata">Faixa Etária</a>
+                </li>
+                
+                @*<li class="nav-item">
+                    <a class="btn btn-warning"><i style="color: #ffffff" class="fas fa-user-cog fa-2x "></i></a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="btn btn-warning fa-2x"><i class="fas fa-door-open" style="color: #ffffff"></i></a>
+                </li>*@
+            </ul>
+        </div>
+    </div>
+</nav>
 
-<div class="@NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </li>
-    </ul>
-</div>
 
 @code {
-    private bool collapseNavMenu = true;
+    bool collapseNavMenu = true;
 
-    private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
-    private void ToggleNavMenu()
+    void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
     }
+
+    void CollapseNavMenu()
+    {
+        collapseNavMenu = true;
+    }
+
 }

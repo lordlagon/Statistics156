@@ -3,54 +3,127 @@
 @using Statistics156_Front.Services;
 @inject IJSRuntime jsRunTime;
 
-<div class="container" style="border: 1px solid red">
-    <h1>Hello, world!</h1>
+<div class="container-fluid" style="border: 1px solid red">
+    <div class="row col-12" style="border: 0px solid blue; padding: 10px">
+        <div class="col col-8 padding: 10px">
+            <h4 style="font-weight: bold">Faixas etárias</h4>
+            <div id="chartdivFaixa" style="border: 1px solid red;"></div>
+        </div>
 
-    <div class="row" style="border: 0px solid red; padding-bottom: 15px">
-
-        <div class="col float-left">
+        <div class="col col-4 padding: 10px">
             <h4 style="font-weight: bold">Tipo de Solicitacao</h4>
-            @*<RadzenDropDown @bind-Value="Tipo.Tipo" AllowClear="true" TValue="string" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowFiltering="true" Style="width:100px"
-                                    Placeholder="Select..." Data=@tipoInfos TextProperty="Tipo" ValueProperty="Tipo" Change=@(args => OnChange(args, "tipo")) />
-
-                </div>
-                <div>*@
             <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
                             Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
                             Change=@(args => OnChange(args, "tipo")) />
+            <h4 style="font-weight: bold">Bairro</h4>
+            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                            Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
+                            Change=@(args => OnChange(args, "tipo")) />
+            <h4 style="font-weight: bold">Regional</h4>
+            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                            Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
+                            Change=@(args => OnChange(args, "tipo")) />
+            <h4 style="font-weight: bold">Assunto</h4>
+            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                            Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
+                            Change=@(args => OnChange(args, "tipo")) />
+            <h4 style="font-weight: bold">Subdivisão</h4>
+            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                            Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
+                            Change=@(args => OnChange(args, "tipo")) />
+            <h4 style="font-weight: bold">Mês</h4>
+            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                            Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
+                            Change=@(args => OnChange(args, "tipo")) />
+            <h4 style="font-weight: bold">Ano</h4>
+            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                            Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
+                            Change=@(args => OnChange(args, "tipo")) />
+            <p>
+                <button class="btn btn-success">Filtrar</button>
+            </p>
         </div>
-    </div> <!-- row-->
-    @if (IsLoading)
-    {
-        <div class="row"> Loading...</div>
-    }else
-    {
-        <div id="chartdiv"></div>
-    }
+    </div>
+    <div class="row col-9" style="border: 0px solid blue; padding: 10px">
+        
+            <h4 style="font-weight: bold">Assuntos por Bairro</h4>
+
+            <div id="chartdiv" style="border: 1px solid red;"></div>
+        
+    </div>
+
+
+    <div class="row col-12" style="border: 0px solid blue; padding: 10px">
+        <div class="col col-4 padding: 10px">
+            
+            <div id="chartdivpie" style="border: 1px solid red;"></div>
+        </div>
+        <div class="col col-8 padding: 10px">
+            <RadzenDataGrid AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="10"
+                            AllowSorting="true" Data="@topAssuntos" TItem="TopAssunto" ColumnWidth="120px"
+                            SelectionMode="DataGridSelectionMode.Single">
+                <Columns>
+
+                    <RadzenDataGridColumn TItem="TopAssunto" Property="Assunto" Title="Assunto" Width="120px" />
+                    <RadzenDataGridColumn TItem="TopAssunto" Property="Subdivisao" Title="Subdivisao" Width="120px" />
+                    <RadzenDataGridColumn TItem="TopAssunto" Property="Ano" Title="Ano" Width="120px" />
+                    <RadzenDataGridColumn TItem="TopAssunto" Property="Count" Title="Count" Width="80px" />
+                </Columns>
+            </RadzenDataGrid>
+        </div>
+
+    </div>
 
     <button class="btn btn-primary" @onclick="GeneratePieChartBlazor">Generate Pie Chart</button>
 </div>
 @code{
-    CountryInfo countryInfo = new CountryInfo();
-    List<CountryInfo> countryInfos = new List<CountryInfo>();
+    IEnumerable<TopAssunto> topAssuntos = new List<TopAssunto>();
     List<TipoSolicitacao> tipoInfos = new List<TipoSolicitacao>();
+    List<AssuntoPorBairro> AssuntoPorBairro = new List<AssuntoPorBairro>();
+    List<FaixaEtariaGeneroChart> faixas = new List<FaixaEtariaGeneroChart>();
+    TopAssunto Assunto = new TopAssunto();
+    string[] meses = new string[] { "" };
     TipoSolicitacao Tipo = new TipoSolicitacao();
     Central central = new Central();
+    string Mes = string.Empty;
     bool IsLoading = false;
 
-    List<ConsultaPorTipo> analiseTipo = new List<ConsultaPorTipo>();
+    List<CountAno> analiseTipo = new List<CountAno>();
 
     protected override async Task OnInitializedAsync()
     {
-        tipoInfos = await central.GetTiposAsync();
+        //meses = central.GetMeses();
+        topAssuntos = await central.GetTop10Assunto();
+        AssuntoPorBairro = await central.GetAssuntoPorBairro("6", "2014");
+        faixas = await central.GetFaixaEtariaGenero("67");
+        if (tipoInfos == null)
+            tipoInfos = new List<TipoSolicitacao>();
+
         await base.OnInitializedAsync();
     }
     async Task GeneratePieChartBlazor()
     {
-        await jsRunTime.InvokeVoidAsync("GenerateLineChart", analiseTipo);
-
+        await jsRunTime.InvokeVoidAsync("GeneratePieChart", "chartdiv", AssuntoPorBairro);
+        await jsRunTime.InvokeVoidAsync("GeneratePieChart", "chartdiv2");
+        //await jsRunTime.InvokeVoidAsync("GenerateLineChart");
+        await jsRunTime.InvokeVoidAsync("GenerateFaixaEtariaChart", faixas);
     }
 
+
+
+
+    async Task GetCharts()
+    {
+        if (Tipo == null || string.IsNullOrEmpty(Tipo.Fk_Tipo) || string.IsNullOrEmpty(Mes))
+            return;
+        await GetAnalisePorTipo();
+        await GeneratePieChartBlazor();
+    }
+
+    async Task GetAnalisePorTipo()
+    {
+        analiseTipo = await central.GetConsultaPorTiposAsync(Tipo.Fk_Tipo, Mes);
+    }
     void OnChange(object value, string name)
     {
 
@@ -64,19 +137,13 @@
                     Tipo = tipoInfos.Where(w => w.Tipo == valor).FirstOrDefault();
                     Console.WriteLine(Tipo.Fk_Tipo);
                     break;
+                case "mes":
+                    Mes = valor;
+                    Console.WriteLine(Mes);
+                    break;
                 default:
                     break;
             }
         }
-        Task.Run(async () => {
-            await GetAnalisePorTipo();
-            await GeneratePieChartBlazor();
-            }
-        ) ;
-
-    }
-    async Task GetAnalisePorTipo()
-    {
-        analiseTipo = await central.GetConsultaPorTiposAsync(Tipo.Fk_Tipo, "Jul");
     }
 }

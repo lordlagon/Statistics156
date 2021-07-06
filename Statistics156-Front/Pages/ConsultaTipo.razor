@@ -1,0 +1,98 @@
+﻿@page "/r"
+@using Statistics156_Front.Data;
+@using Statistics156_Front.Services;
+@inject IJSRuntime jsRunTime;
+
+<div class="container" style="border: 1px solid red">
+    <h1>Hello, world!</h1>
+
+    <div class="row" style="border: 0px solid red; padding-bottom: 15px">
+
+        <div class="col-4 ">
+            <h4 style="font-weight: bold">Tipo de Solicitacao</h4>
+            
+            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                            Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
+                            Change=@(args => OnChange(args, "tipo")) />
+        </div>
+        <div class="col-4 ">
+            <h4 style="font-weight: bold">Mês</h4>
+            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                            Data=@(meses.Select(c => c).Distinct())
+                            Change=@(args => OnChange(args, "mes")) />
+        </div>
+    </div> 
+    <div class="row col-8">
+
+        <div id="chartdiv" ></div>
+    </div>
+
+    <button class="btn btn-primary" @onclick="GeneratePieChartBlazor">Generate Pie Chart</button>
+</div>
+@code{
+    CountryInfo countryInfo = new CountryInfo();
+    List<CountryInfo> countryInfos = new List<CountryInfo>();
+    List<TipoSolicitacao> tipoInfos = new List<TipoSolicitacao>();
+    string[] meses = new string[] { "" };
+    TipoSolicitacao Tipo = new TipoSolicitacao();
+    Central central = new Central();
+    string Mes = string.Empty;
+    bool IsLoading = false;
+
+    List<CountAno> analiseTipo = new List<CountAno>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        meses = central.GetMeses();
+        tipoInfos = await central.GetTiposAsync();
+        if (tipoInfos == null)
+            tipoInfos = new List<TipoSolicitacao>();
+        await base.OnInitializedAsync();
+    }
+    async Task GeneratePieChartBlazor()
+    {
+        await jsRunTime.InvokeVoidAsync("GenerateLineChart", analiseTipo, Tipo.Tipo);
+    }
+
+    void OnChange(object value, string name)
+    {
+
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+
+        if (str is string valor)
+        {
+            switch (name)
+            {
+                case "tipo":
+                    Tipo = tipoInfos.Where(w => w.Tipo == valor).FirstOrDefault();
+                    Console.WriteLine(Tipo.Fk_Tipo);
+                    break;
+                case "mes":
+                    Mes = valor;
+                    Console.WriteLine(Mes);
+                    break;
+                default:
+                    break;
+            }
+        }
+        Task.Run(async () =>
+        {
+            await GetCharts();
+        }
+        );
+
+    }
+
+    async Task GetCharts()
+    {
+        if (Tipo == null || string.IsNullOrEmpty(Tipo.Fk_Tipo) || string.IsNullOrEmpty(Mes))
+            return;
+        await GetAnalisePorTipo();
+        await GeneratePieChartBlazor();
+    }
+
+    async Task GetAnalisePorTipo()
+    {
+        analiseTipo = await central.GetConsultaPorTiposAsync(Tipo.Fk_Tipo, Mes);
+    }
+}
