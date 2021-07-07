@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Radzen;
 using Statistics156_Front.Data;
+using Statistics156_Front.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,12 +30,14 @@ namespace Statistics156_Front
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
 
             services.AddScoped<DialogService>();
             services.AddScoped<NotificationService>();
             services.AddScoped<TooltipService>();
             services.AddScoped<ContextMenuService>();
+
+            services.AddScoped<ISelecoesService, SelecoesService>();
+            services.AddScoped<ICentralService, CentralService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,0 +1,105 @@
+﻿@page "/top10"
+@using Statistics156_Front.Data;
+@inject Statistics156_Front.Services.ISelecoesService _selecaoService
+@inject Statistics156_Front.Services.ICentralService _centralService
+@inject NotificationService _notificationService
+@inject IJSRuntime jsRunTime;
+
+<div class="container-fluid" style="border: 0px solid red">
+    <div class="row col-12" style="border: 0px solid green; padding: 15px">
+        <div class="col col-3">
+            <h4 style="font-weight: bold">Assunto</h4>
+            <RadzenDropDown AllowClear="true" TValue="string" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                            AllowFiltering="true" Style="width:300px" Placeholder=""
+                            Data=@assuntoInfos TextProperty="Assunto" ValueProperty="Assunto"
+                            Change=@(args => OnChange(args, "assunto")) />
+        </div>
+        <div class="col col-3">
+            <h4 style="font-weight: bold">Bairro</h4>
+            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                            Data=@(bairroInfos.Select(c => c.Bairro).Distinct())
+                            Change=@(args => OnChange(args, "bairro")) />
+        </div>
+        <div class="col col-2" style=" padding: 25px">
+            <button class="btn btn-primary" @onclick="GetTop10Assuntos">Filtrar</button>
+        </div>
+    </div>
+
+    <div class="row col-12" style="border: 0px solid blue; padding: 10px">
+        <div class="col col-12 padding: 10px">
+            <RadzenDataGrid AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="10"
+                            AllowSorting="true" Data="@topAssuntos" TItem="TopAssunto" ColumnWidth="120px"
+                            SelectionMode="DataGridSelectionMode.Single">
+                <Columns>
+
+                    <RadzenDataGridColumn TItem="TopAssunto" Property="Assunto" Title="Assunto" Width="120px" />
+                    <RadzenDataGridColumn TItem="TopAssunto" Property="Subdivisao" Title="Subdivisao" Width="120px" />
+                    <RadzenDataGridColumn TItem="TopAssunto" Property="Ano" Title="Ano" Width="120px" />
+                    <RadzenDataGridColumn TItem="TopAssunto" Property="Count" Title="Quantidade" Width="80px" />
+                </Columns>
+            </RadzenDataGrid>
+        </div>
+
+    </div>
+</div>
+
+@code{
+
+    List<BairroSolicitacao> bairroInfos = new List<BairroSolicitacao>();
+    List<AssuntoSolicitacao> assuntoInfos = new List<AssuntoSolicitacao>();
+    BairroSolicitacao Bairro = new BairroSolicitacao();
+    AssuntoSolicitacao Assunto = new AssuntoSolicitacao();
+    List<TopAssunto> topAssuntos = new List<TopAssunto>();
+    TopAssunto TopAssunto = new TopAssunto();
+
+    List<DataAssuntoPorBairro> AssuntoPorBairro = new List<DataAssuntoPorBairro>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetSelecoes();
+        await GetTop10Assuntos();
+        await base.OnInitializedAsync();
+    }
+
+    async Task GenerateChartBlazor()
+    {
+        await jsRunTime.InvokeVoidAsync("GenerateLineChart", AssuntoPorBairro);
+    }
+    async Task GetTop10Assuntos()
+    {
+        if (!string.IsNullOrEmpty(Bairro.Bairro))
+            topAssuntos = await _centralService.GetTop10Assunto(Bairro);
+        else
+            topAssuntos = await _centralService.GetTop10Assunto();
+
+
+    }
+
+    async Task GetSelecoes()
+    {
+        bairroInfos = await _selecaoService.GetBairrosAsync() ?? new List<BairroSolicitacao>();
+        assuntoInfos = await _selecaoService.GetAssuntosAsync() ?? new List<AssuntoSolicitacao>();
+    }
+    void OnChange(object value, string name)
+    {
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+        if (str is string valor)
+        {
+            switch (name)
+            {
+                case "bairro":
+                    Bairro = bairroInfos.Where(w => w.Bairro == valor).FirstOrDefault();
+                    break;
+                case "assunto":
+                    Assunto = assuntoInfos.Where(w => w.Assunto == valor).FirstOrDefault();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    void ShowNotification(NotificationMessage message)
+    {
+        _notificationService.Notify(message);
+    }
+}

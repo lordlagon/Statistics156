@@ -1,0 +1,103 @@
+﻿@page "/assuntos"
+@using Statistics156_Front.Data;
+@inject Statistics156_Front.Services.ISelecoesService _selecaoService
+@inject Statistics156_Front.Services.ICentralService _centralService
+@inject NotificationService _notificationService
+@inject IJSRuntime jsRunTime;
+
+<div class="container-fluid" style="border: 1px solid red">
+    <div class="row col-12" style="border: 0px solid green; padding: 15px">
+        <div class="col col-3">
+            <h4 style="font-weight: bold">Assunto</h4>
+            <RadzenDropDown AllowClear="true" TValue="string" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                            AllowFiltering="true" Style="width:300px" Placeholder=""
+                            Data=@assuntoInfos TextProperty="Assunto" ValueProperty="Assunto"
+                            Change=@(args => OnChange(args, "assunto")) />
+        </div>
+        <div class="col col-3">
+            <h4 style="font-weight: bold">Bairro</h4>
+            <RadzenDropDown AllowClear="true" TValue="string" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                            AllowFiltering="true" Style="width:300px" Placeholder=""
+                            Data=@bairroInfos TextProperty="Bairro" ValueProperty="Bairro"
+                            Change=@(args => OnChange(args, "bairro")) />
+        </div>
+        <div class="col col-2" style=" padding: 25px">
+            <button class="btn btn-primary" @onclick="GetCharts">Filtrar</button>
+        </div>
+    </div>
+
+    <div class="row col-12" style="border: 0px solid blue; padding: 10px">
+        <div class="col col-12 padding: 10px">
+            <h4 style="font-weight: bold">@Titulo</h4>
+            <div id="chartdivline" style="border: 0px solid red;"></div>
+        </div>
+    </div>
+</div>
+
+@code{
+
+    List<BairroSolicitacao> bairroInfos = new List<BairroSolicitacao>();
+    List<AssuntoSolicitacao> assuntoInfos = new List<AssuntoSolicitacao>();
+    BairroSolicitacao Bairro = new BairroSolicitacao();
+    AssuntoSolicitacao Assunto = new AssuntoSolicitacao();
+    string Titulo = string.Empty;
+    List<DataAssuntoPorBairro> AssuntoPorBairro = new List<DataAssuntoPorBairro>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await GetSelecoes();
+        Titulo = "Selecione um assunto e um Bairro";
+        await base.OnInitializedAsync();
+    }
+
+    async Task GenerateChartBlazor()
+    {
+        await jsRunTime.InvokeVoidAsync("GenerateLineChart", AssuntoPorBairro);
+    }
+
+    async Task GetCharts()
+    {
+        AssuntoPorBairro = new List<DataAssuntoPorBairro>();
+        if(string.IsNullOrEmpty(Assunto?.Fk_Assunto) || string.IsNullOrEmpty(Bairro?.Fk_bairro))
+            ShowNotification(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Erro", Detail = "Selecione um assunto e um bairro", Duration = 4000 });
+        else
+            await GetAssuntoPorBairro(Assunto.Fk_Assunto, Bairro.Fk_bairro);
+    }
+
+    async Task GetAssuntoPorBairro(string assunto, string bairro)
+    {
+        AssuntoPorBairro = await _centralService.GetDataAssuntoPorBairro(assunto, bairro);
+        if (AssuntoPorBairro.Any())
+            await GenerateChartBlazor();
+        else
+            ShowNotification(new NotificationMessage { Severity = NotificationSeverity.Error, Summary = "Erro", Detail = "Nenhum dado localizado", Duration = 4000 });
+    }
+
+    async Task GetSelecoes()
+    {
+        bairroInfos = await _selecaoService.GetBairrosAsync() ?? new List<BairroSolicitacao>();
+        assuntoInfos = await _selecaoService.GetAssuntosAsync() ?? new List<AssuntoSolicitacao>();
+    }
+    void OnChange(object value, string name)
+    {
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+        if (str is string valor)
+        {
+            switch (name)
+            {
+                case "bairro":
+                    Bairro = bairroInfos.Where(w => w.Bairro == valor).FirstOrDefault();
+                    break;
+                case "assunto":
+                    Assunto = assuntoInfos.Where(w => w.Assunto == valor).FirstOrDefault();
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    void ShowNotification(NotificationMessage message)
+    {
+        _notificationService.Notify(message);
+    }
+}

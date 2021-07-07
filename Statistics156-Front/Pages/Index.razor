@@ -1,134 +1,203 @@
 ﻿@page "/"
 @using Statistics156_Front.Data;
-@using Statistics156_Front.Services;
+@inject Statistics156_Front.Services.ISelecoesService _selecaoService
+@inject Statistics156_Front.Services.ICentralService _centralService
 @inject IJSRuntime jsRunTime;
 
-<div class="container-fluid" style="border: 1px solid red">
+<div class="container-fluid" style="border: 0px solid red">
     <div class="row col-12" style="border: 0px solid blue; padding: 10px">
-        <div class="col col-8 padding: 10px">
-            <h4 style="font-weight: bold">Faixas etárias</h4>
-            <div id="chartdivFaixa" style="border: 1px solid red;"></div>
+        <div class="col col-9 padding: 10px">
+            <h4 style="font-weight: bold">@Titulo</h4>
+            <div id="chartdiv" style="border: 0px solid red;"></div>
         </div>
-
-        <div class="col col-4 padding: 10px">
-            <h4 style="font-weight: bold">Tipo de Solicitacao</h4>
+        <div class="col col-3 padding: 10px" style="border: 0px solid blue;">
+            @*<h4 style="font-weight: bold">Tipo de Solicitacao</h4>
             <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
                             Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
-                            Change=@(args => OnChange(args, "tipo")) />
+                            Change=@(args => OnChange(args, "tipo")) />*@
             <h4 style="font-weight: bold">Bairro</h4>
             <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
-                            Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
-                            Change=@(args => OnChange(args, "tipo")) />
+                            Data=@(bairroInfos.Select(c => c.Bairro).Distinct())
+                            Change=@(args => OnChange(args, "bairro")) />
             <h4 style="font-weight: bold">Regional</h4>
             <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
-                            Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
-                            Change=@(args => OnChange(args, "tipo")) />
+                            Data=@(regionalInfos.Select(c => c.Regional).Distinct())
+                            Change=@(args => OnChange(args, "regional")) />
             <h4 style="font-weight: bold">Assunto</h4>
+            <RadzenDropDown AllowClear="true" TValue="string" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowFiltering="true" Style="width:300px"
+                            Placeholder="" Data=@assuntoInfos TextProperty="Assunto" ValueProperty="Assunto"
+                            Change=@(args => OnChange(args, "assunto")) />
+
+            @*<h4 style="font-weight: bold">Subdivisão</h4>
+            <RadzenDropDown AllowClear="true" TValue="string" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowFiltering="true" Style="width:300px"
+                            Placeholder="" Data=@subdivisaoInfos TextProperty="Subdivisao" ValueProperty="Subdivisao"
+                            Change=@(args => OnChange(args, "subdivisao")) />*@
+
+            @*<h4 style="font-weight: bold">Mês</h4>
             <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
-                            Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
-                            Change=@(args => OnChange(args, "tipo")) />
-            <h4 style="font-weight: bold">Subdivisão</h4>
-            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
-                            Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
-                            Change=@(args => OnChange(args, "tipo")) />
-            <h4 style="font-weight: bold">Mês</h4>
-            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
-                            Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
-                            Change=@(args => OnChange(args, "tipo")) />
+                            Data=@(meses.Select(c => c).Distinct())
+                            Change=@(args => OnChange(args, "mes")) />*@
             <h4 style="font-weight: bold">Ano</h4>
             <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
-                            Data=@(tipoInfos.Select(c => c.Tipo).Distinct())
-                            Change=@(args => OnChange(args, "tipo")) />
+                            Data=@(anos.Select(c => c).Distinct())
+                            Change=@(args => OnChange(args, "ano")) />
             <p>
-                <button class="btn btn-success">Filtrar</button>
+                <button class="btn btn-primary" @onclick="Filtrar">Filtrar</button>
+
             </p>
         </div>
     </div>
-    <div class="row col-9" style="border: 0px solid blue; padding: 10px">
-        
-            <h4 style="font-weight: bold">Assuntos por Bairro</h4>
-
-            <div id="chartdiv" style="border: 1px solid red;"></div>
-        
-    </div>
-
-
     <div class="row col-12" style="border: 0px solid blue; padding: 10px">
-        <div class="col col-4 padding: 10px">
-            
-            <div id="chartdivpie" style="border: 1px solid red;"></div>
+        <div class="col col-12 padding: 10px">
+            <h4 style="font-weight: bold">@TituloFaixa</h4>
+            <div id="chartdivFaixa" style="border: 0px solid red;"></div>
         </div>
-        <div class="col col-8 padding: 10px">
-            <RadzenDataGrid AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="10"
-                            AllowSorting="true" Data="@topAssuntos" TItem="TopAssunto" ColumnWidth="120px"
-                            SelectionMode="DataGridSelectionMode.Single">
-                <Columns>
-
-                    <RadzenDataGridColumn TItem="TopAssunto" Property="Assunto" Title="Assunto" Width="120px" />
-                    <RadzenDataGridColumn TItem="TopAssunto" Property="Subdivisao" Title="Subdivisao" Width="120px" />
-                    <RadzenDataGridColumn TItem="TopAssunto" Property="Ano" Title="Ano" Width="120px" />
-                    <RadzenDataGridColumn TItem="TopAssunto" Property="Count" Title="Count" Width="80px" />
-                </Columns>
-            </RadzenDataGrid>
-        </div>
-
     </div>
-
-    <button class="btn btn-primary" @onclick="GeneratePieChartBlazor">Generate Pie Chart</button>
+    
 </div>
 @code{
-    IEnumerable<TopAssunto> topAssuntos = new List<TopAssunto>();
+
     List<TipoSolicitacao> tipoInfos = new List<TipoSolicitacao>();
+    List<BairroSolicitacao> bairroInfos = new List<BairroSolicitacao>();
+    List<AssuntoSolicitacao> assuntoInfos = new List<AssuntoSolicitacao>();
+    List<RegionalSolicitacao> regionalInfos = new List<RegionalSolicitacao>();
+    List<SubdivisaoSolicitacao> subdivisaoInfos = new List<SubdivisaoSolicitacao>();
+    List<FaixaEtaria> faixasEtarias = new List<FaixaEtaria>();
+    TipoSolicitacao Tipo = new TipoSolicitacao();
+    BairroSolicitacao Bairro = new BairroSolicitacao();
+    AssuntoSolicitacao Assunto = new AssuntoSolicitacao();
+    RegionalSolicitacao Regional = new RegionalSolicitacao();
+    SubdivisaoSolicitacao Subdivisao = new SubdivisaoSolicitacao();
+
+    string[] meses = new string[] { string.Empty };
+    string[] anos = new string[] { string.Empty };
+    string Mes = string.Empty;
+    string Ano = string.Empty;
+    string Titulo = string.Empty;
+    string TituloFaixa = string.Empty;
+
+
     List<AssuntoPorBairro> AssuntoPorBairro = new List<AssuntoPorBairro>();
     List<FaixaEtariaGeneroChart> faixas = new List<FaixaEtariaGeneroChart>();
-    TopAssunto Assunto = new TopAssunto();
-    string[] meses = new string[] { "" };
-    TipoSolicitacao Tipo = new TipoSolicitacao();
-    Central central = new Central();
-    string Mes = string.Empty;
-    bool IsLoading = false;
 
     List<CountAno> analiseTipo = new List<CountAno>();
 
     protected override async Task OnInitializedAsync()
     {
-        //meses = central.GetMeses();
-        topAssuntos = await central.GetTop10Assunto();
-        AssuntoPorBairro = await central.GetAssuntoPorBairro("6", "2014");
-        faixas = await central.GetFaixaEtariaGenero("67");
-        if (tipoInfos == null)
-            tipoInfos = new List<TipoSolicitacao>();
-
+        Titulo = "Top 10 Assunto Bairro CENTRO Ano 2021";
+        TituloFaixa = "Quantidade de Solicitações por Faixas etárias por Genero Ano 2021";
+        await GetSelecoes();
         await base.OnInitializedAsync();
     }
-    async Task GeneratePieChartBlazor()
+
+    async Task Filtrar()
+    {
+        if (!string.IsNullOrEmpty(Bairro.Bairro) || !string.IsNullOrEmpty(Ano))
+            await GetBairroPorAssunto(Bairro, Ano);
+        if (!string.IsNullOrEmpty(Assunto.Assunto) && !string.IsNullOrEmpty(Regional.Regional))
+            await GetFaixaEtariaPorRegional(Regional);
+
+        if (!string.IsNullOrEmpty(Assunto.Assunto))
+            await GetFaixaEtariaPorAssunto(Assunto);
+
+    }
+
+    async Task GenerateChartBlazor()
     {
         await jsRunTime.InvokeVoidAsync("GeneratePieChart", "chartdiv", AssuntoPorBairro);
-        await jsRunTime.InvokeVoidAsync("GeneratePieChart", "chartdiv2");
-        //await jsRunTime.InvokeVoidAsync("GenerateLineChart");
         await jsRunTime.InvokeVoidAsync("GenerateFaixaEtariaChart", faixas);
     }
 
-
-
-
-    async Task GetCharts()
+    async Task GetChartsInicial()
     {
-        if (Tipo == null || string.IsNullOrEmpty(Tipo.Fk_Tipo) || string.IsNullOrEmpty(Mes))
-            return;
-        await GetAnalisePorTipo();
-        await GeneratePieChartBlazor();
+        await GetAssuntoPorBairro();
+        await GetFaixaEtariaPorAssunto();
     }
 
-    async Task GetAnalisePorTipo()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        analiseTipo = await central.GetConsultaPorTiposAsync(Tipo.Fk_Tipo, Mes);
+        if (firstRender)
+        {
+            await GetChartsInicial();
+            //await GenerateChartBlazor();
+        }
+        await base.OnAfterRenderAsync(firstRender);
     }
+
+    async Task GetBairroPorAssunto(BairroSolicitacao bairro, string ano)
+    {
+        if (string.IsNullOrEmpty(ano))
+        { 
+            ano = "2021"; 
+        }
+        AssuntoPorBairro = await _centralService.GetBairroAssuntoAno(bairro.Fk_bairro, ano);
+        if (AssuntoPorBairro != null && AssuntoPorBairro.Any())
+        {
+            Titulo = $"Top 10 Assuntos por Bairro: {bairro.Bairro} Ano: {ano}";
+            await jsRunTime.InvokeVoidAsync("GeneratePieChart", "chartdiv", AssuntoPorBairro);
+        }
+    }
+    async Task GetAssuntoPorBairro()
+    {
+        AssuntoPorBairro = await _centralService.GetAssuntoPorBairro();
+        if (AssuntoPorBairro != null && AssuntoPorBairro.Any())
+            await jsRunTime.InvokeVoidAsync("GeneratePieChart", "chartdiv", AssuntoPorBairro);
+    }
+    async Task GetFaixaEtariaPorAssunto()
+    {
+        faixas = await _centralService.GetFaixaEtariaGenero(faixasEtarias);
+        if (faixas != null && faixas.Any())
+        {
+
+            await jsRunTime.InvokeVoidAsync("GenerateFaixaEtariaChart", faixas);
+        }
+
+    }
+    async Task GetFaixaEtariaPorAssunto(AssuntoSolicitacao assunto)
+    {
+        faixas = await _centralService.GetFaixaEtariaGenero(assunto.Fk_Assunto, faixasEtarias);
+        if (faixas != null && faixas.Any())
+        {
+            TituloFaixa = $"Assunto: {assunto.Assunto} por Faixas etárias por Genero Ano {Ano}";
+            await jsRunTime.InvokeVoidAsync("GenerateFaixaEtariaChart", faixas);
+        }
+        
+    }
+    async Task GetFaixaEtariaPorRegional(RegionalSolicitacao regional)
+    {
+        faixas = await _centralService.GetFaixaEtariaGeneroRegional(regional, faixasEtarias);
+        if (faixas != null && faixas.Any())
+        {
+            TituloFaixa = $"Regional: {regional} por Faixas etárias por Genero";
+            await jsRunTime.InvokeVoidAsync("GenerateFaixaEtariaChart", faixas);
+        }
+        
+    }
+
+    async Task GetSelecoes()
+    {
+        meses = _selecaoService.GetMeses();
+        anos = _selecaoService.GetAnos();
+        tipoInfos = await _selecaoService.GetTiposAsync() ?? new List<TipoSolicitacao>();
+        bairroInfos = await _selecaoService.GetBairrosAsync() ?? new List<BairroSolicitacao>();
+        assuntoInfos = await _selecaoService.GetAssuntosAsync() ?? new List<AssuntoSolicitacao>();
+        regionalInfos = await _selecaoService.GetRegionaisAsync() ?? new List<RegionalSolicitacao>();
+        subdivisaoInfos = await _selecaoService.GetSubdivisoesAsync() ?? new List<SubdivisaoSolicitacao>();
+        faixasEtarias = await _selecaoService.GetFaixasEtariasAsync() ?? new List<FaixaEtaria>();
+
+    }
+void Clear(){
+    TipoSolicitacao Tipo = new TipoSolicitacao();
+    BairroSolicitacao Bairro = new BairroSolicitacao();
+    AssuntoSolicitacao Assunto = new AssuntoSolicitacao();
+    RegionalSolicitacao Regional = new RegionalSolicitacao();
+    SubdivisaoSolicitacao Subdivisao = new SubdivisaoSolicitacao();
+}
+
     void OnChange(object value, string name)
     {
-
+        Clear();
         var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
-
         if (str is string valor)
         {
             switch (name)
@@ -137,9 +206,23 @@
                     Tipo = tipoInfos.Where(w => w.Tipo == valor).FirstOrDefault();
                     Console.WriteLine(Tipo.Fk_Tipo);
                     break;
+                case "bairro":
+                    Bairro = bairroInfos.Where(w => w.Bairro == valor).FirstOrDefault();
+                    break;
+                case "regional":
+                    Regional = regionalInfos.Where(w => w.Regional == valor).FirstOrDefault();
+                    break;
+                case "assunto":
+                    Assunto = assuntoInfos.Where(w => w.Assunto == valor).FirstOrDefault();
+                    break;
+                case "subdivisao":
+                    Subdivisao = subdivisaoInfos.Where(w => w.Subdivisao == valor).FirstOrDefault();
+                    break;
+                case "ano":
+                    Ano = valor;
+                    break;
                 case "mes":
                     Mes = valor;
-                    Console.WriteLine(Mes);
                     break;
                 default:
                     break;

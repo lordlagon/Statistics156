@@ -1,7 +1,8 @@
 ﻿<!-- <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3 fixed-top" style="background-color: #28A745"> -->
-<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background-color: #f0f0f0">
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark border-bottom box-shadow mb-3" style="background-color: #296855">
     <div class="container-fluid">
-        <label class="navbar-brand font-weight-bold text-dark " asp-page="/Index" >Statistics 156</label>
+        <img class="navbar-brand" alt="Statistics 156" width="100" src="/images/statistics.jpeg" asp-page="/Index" />
+        <label class="navbar-brand font-weight-bold text-light " asp-page="/Index">Statistics 156</label>
         <button class="navbar-toggler" @onclick="ToggleNavMenu" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -11,13 +12,13 @@
                 <li class="nav-item">
                     <a style="color: black" class="btn " href="" Match="NavLinkMatch.All">Home</a>
                 </li>
+                @*<li class="nav-item">
+                    <a style="color: black" class="btn " href="top10">Top 10 Solicitações</a>
+                </li>*@
                 <li class="nav-item">
-                    <a style="color: black" class="btn " href="counter">Central156</a>
+                    <a style="color: black" class="btn " href="assuntos">Assunto por Bairro</a>
                 </li>
-                <li class="nav-item">
-                    <a style="color: black" class="btn " href="fetchdata">Faixa Etária</a>
-                </li>
-                
+
                 @*<li class="nav-item">
                     <a class="btn btn-warning"><i style="color: #ffffff" class="fas fa-user-cog fa-2x "></i></a>
                 </li>
