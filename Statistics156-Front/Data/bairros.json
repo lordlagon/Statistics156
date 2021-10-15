@@ -1,0 +1,302 @@
+[
+  {
+    "fk_bairro": "3",
+    "bairro": "ABRANCHES"
+  },
+  {
+    "fk_bairro": "4",
+    "bairro": "AGUA VERDE"
+  },
+  {
+    "fk_bairro": "5",
+    "bairro": "AHU"
+  },
+  {
+    "fk_bairro": "6",
+    "bairro": "ALTO BOQUEIRAO"
+  },
+  {
+    "fk_bairro": "7",
+    "bairro": "ALTO DA GLORIA"
+  },
+  {
+    "fk_bairro": "8",
+    "bairro": "ALTO DA RUA XV"
+  },
+  {
+    "fk_bairro": "9",
+    "bairro": "ATUBA"
+  },
+  {
+    "fk_bairro": "10",
+    "bairro": "AUGUSTA"
+  },
+  {
+    "fk_bairro": "11",
+    "bairro": "BACACHERI"
+  },
+  {
+    "fk_bairro": "12",
+    "bairro": "BAIRRO ALTO"
+  },
+  {
+    "fk_bairro": "13",
+    "bairro": "BARREIRINHA"
+  },
+  {
+    "fk_bairro": "14",
+    "bairro": "BATEL"
+  },
+  {
+    "fk_bairro": "15",
+    "bairro": "BIGORRILHO"
+  },
+  {
+    "fk_bairro": "16",
+    "bairro": "BOA VISTA"
+  },
+  {
+    "fk_bairro": "17",
+    "bairro": "BOM RETIRO"
+  },
+  {
+    "fk_bairro": "18",
+    "bairro": "BOQUEIRAO"
+  },
+  {
+    "fk_bairro": "19",
+    "bairro": "BUTIATUVINHA"
+  },
+  {
+    "fk_bairro": "20",
+    "bairro": "CABRAL"
+  },
+  {
+    "fk_bairro": "21",
+    "bairro": "CACHOEIRA"
+  },
+  {
+    "fk_bairro": "22",
+    "bairro": "CAJURU"
+  },
+  {
+    "fk_bairro": "23",
+    "bairro": "CAMPINA DO SIQUEIRA"
+  },
+  {
+    "fk_bairro": "24",
+    "bairro": "CAMPO COMPRIDO"
+  },
+  {
+    "fk_bairro": "25",
+    "bairro": "CAMPO DE SANTANA"
+  },
+  {
+    "fk_bairro": "26",
+    "bairro": "CAPAO DA IMBUIA"
+  },
+  {
+    "fk_bairro": "27",
+    "bairro": "CAPAO RASO"
+  },
+  {
+    "fk_bairro": "28",
+    "bairro": "CASCATINHA"
+  },
+  {
+    "fk_bairro": "29",
+    "bairro": "CAXIMBA"
+  },
+  {
+    "fk_bairro": "30",
+    "bairro": "CENTRO"
+  },
+  {
+    "fk_bairro": "31",
+    "bairro": "CENTRO CIVICO"
+  },
+  {
+    "fk_bairro": "32",
+    "bairro": "CIDADE INDUSTRIAL"
+  },
+  {
+    "fk_bairro": "33",
+    "bairro": "CRISTO REI"
+  },
+  {
+    "fk_bairro": "34",
+    "bairro": "FANNY"
+  },
+  {
+    "fk_bairro": "35",
+    "bairro": "FAZENDINHA"
+  },
+  {
+    "fk_bairro": "36",
+    "bairro": "GANCHINHO"
+  },
+  {
+    "fk_bairro": "37",
+    "bairro": "GUABIROTUBA"
+  },
+  {
+    "fk_bairro": "38",
+    "bairro": "GUAIRA"
+  },
+  {
+    "fk_bairro": "39",
+    "bairro": "HAUER"
+  },
+  {
+    "fk_bairro": "40",
+    "bairro": "HUGO LANGE"
+  },
+  {
+    "fk_bairro": "41",
+    "bairro": "JARDIM BOTANICO"
+  },
+  {
+    "fk_bairro": "42",
+    "bairro": "JARDIM DAS AMERICAS"
+  },
+  {
+    "fk_bairro": "43",
+    "bairro": "JARDIM SOCIAL"
+  },
+  {
+    "fk_bairro": "44",
+    "bairro": "JUVEVE"
+  },
+  {
+    "fk_bairro": "45",
+    "bairro": "LAMENHA PEQUENA"
+  },
+  {
+    "fk_bairro": "46",
+    "bairro": "LINDOIA"
+  },
+  {
+    "fk_bairro": "47",
+    "bairro": "MERCES"
+  },
+  {
+    "fk_bairro": "48",
+    "bairro": "MOSSUNGUE"
+  },
+  {
+    "fk_bairro": "49",
+    "bairro": "NOVO MUNDO"
+  },
+  {
+    "fk_bairro": "50",
+    "bairro": "ORLEANS"
+  },
+  {
+    "fk_bairro": "51",
+    "bairro": "PAROLIN"
+  },
+  {
+    "fk_bairro": "52",
+    "bairro": "PILARZINHO"
+  },
+  {
+    "fk_bairro": "53",
+    "bairro": "PINHEIRINHO"
+  },
+  {
+    "fk_bairro": "54",
+    "bairro": "PORTAO"
+  },
+  {
+    "fk_bairro": "55",
+    "bairro": "PRADO VELHO"
+  },
+  {
+    "fk_bairro": "56",
+    "bairro": "REBOUCAS"
+  },
+  {
+    "fk_bairro": "57",
+    "bairro": "RIVIERA"
+  },
+  {
+    "fk_bairro": "58",
+    "bairro": "SANTA CANDIDA"
+  },
+  {
+    "fk_bairro": "59",
+    "bairro": "SANTA FELICIDADE"
+  },
+  {
+    "fk_bairro": "60",
+    "bairro": "SANTA QUITERIA"
+  },
+  {
+    "fk_bairro": "61",
+    "bairro": "SANTO INACIO"
+  },
+  {
+    "fk_bairro": "62",
+    "bairro": "SAO BRAZ"
+  },
+  {
+    "fk_bairro": "63",
+    "bairro": "SAO FRANCISCO"
+  },
+  {
+    "fk_bairro": "64",
+    "bairro": "SAO JOAO"
+  },
+  {
+    "fk_bairro": "65",
+    "bairro": "SAO LOURENCO"
+  },
+  {
+    "fk_bairro": "66",
+    "bairro": "SAO MIGUEL"
+  },
+  {
+    "fk_bairro": "67",
+    "bairro": "SEMINARIO"
+  },
+  {
+    "fk_bairro": "68",
+    "bairro": "SITIO CERCADO"
+  },
+  {
+    "fk_bairro": "69",
+    "bairro": "TABOAO"
+  },
+  {
+    "fk_bairro": "70",
+    "bairro": "TARUMA"
+  },
+  {
+    "fk_bairro": "71",
+    "bairro": "TATUQUARA"
+  },
+  {
+    "fk_bairro": "72",
+    "bairro": "TINGUI"
+  },
+  {
+    "fk_bairro": "73",
+    "bairro": "UBERABA"
+  },
+  {
+    "fk_bairro": "74",
+    "bairro": "UMBARA"
+  },
+  {
+    "fk_bairro": "75",
+    "bairro": "VILA IZABEL"
+  },
+  {
+    "fk_bairro": "76",
+    "bairro": "VISTA ALEGRE"
+  },
+  {
+    "fk_bairro": "77",
+    "bairro": "XAXIM"
+  }
+]

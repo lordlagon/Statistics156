@@ -5,13 +5,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace Statistics156_Front.Services
 {
     public interface ISelecoesService
     {
         Task<List<TipoSolicitacao>> GetTiposAsync();
-        Task<List<BairroSolicitacao>> GetBairrosAsync();
+        List<BairroSolicitacao> GetBairrosAsync();
         Task<List<RegionalSolicitacao>> GetRegionaisAsync();
         Task<List<AssuntoSolicitacao>> GetAssuntosAsync();
         Task<List<SubdivisaoSolicitacao>> GetSubdivisoesAsync();
@@ -21,6 +23,7 @@ namespace Statistics156_Front.Services
     }
     public class SelecoesService : ISelecoesService
     {
+        const string bairroJson = "C:\\Sistemas\\TCC\\Central156\\Statistics156-Front\\Data\\bairros.json";
         public async Task<List<AssuntoSolicitacao>> GetAssuntosAsync()
         {
             try
@@ -40,22 +43,16 @@ namespace Statistics156_Front.Services
                 return null;
             }
         }
-        public async Task<List<BairroSolicitacao>> GetBairrosAsync()
+        public List<BairroSolicitacao> GetBairrosAsync()
         {
             try
             {
-                var result = await AppConfiguration.BaseUrl
-                    .AppendPathSegment("selecao")
-                    .AppendPathSegment("bairros")
-                    .GetJsonAsync<List<BairroSolicitacao>>();
-
-                result.Remove(result.FirstOrDefault(w => w.Bairro == "NA"));
-
-                return result;
-
+                var bairros = LoadJson<BairroSolicitacao>(bairroJson);
+                return bairros;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 return null;
             }
         }
@@ -115,7 +112,6 @@ namespace Statistics156_Front.Services
             }
             catch (Exception)
             {
-
                 return null;
             }
         }
@@ -139,6 +135,12 @@ namespace Statistics156_Front.Services
                 return null;
             }
         }
+        public List<T> LoadJson<T>(string fileJson)
+        {
+            using StreamReader r = new(fileJson);
+            return JsonConvert.DeserializeObject<List<T>>(r.ReadToEnd());
+        }
+
         public string[] GetMeses()
         {
             var meses = new string[] { "Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez" };

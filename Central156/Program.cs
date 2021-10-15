@@ -30,7 +30,7 @@ namespace Central156
             var FilesDateNow = GetFileCurrent(files)?.ToList();
             if (FilesDateNow != null)
                 FilesDateNow.ForEach(f => files.Add(f));
-            //DownloadFile(files);
+            DownloadFile(files);
             ReadAllFiles(files);
         }
         private IEnumerable<string> GetFileCurrent(IEnumerable<string> files)
@@ -75,13 +75,10 @@ namespace Central156
                           AppConfiguration.DiretorioLocal + "Base156/" + file;
                 if (File.Exists(url) && url.Contains("Base156/"))
                 {
-                    // if (url.Contains("2021-01-01_156_-_Base_de_Dados"))
-                    //{
                     var (entradas, saidas, Erros) = ReadFile(url, file);
                     totalErros += Erros;
                     totalLinhas += saidas;
                     totalEntradas += entradas;
-                    //}
                 }
             }
             Console.WriteLine($"Entrada inicial = {totalEntradas} - Saídas Modificadas = {totalLinhas} - Total de Erros={totalErros}");

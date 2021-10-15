@@ -77,7 +77,7 @@
 
     async Task GetSelecoes()
     {
-        bairroInfos = await _selecaoService.GetBairrosAsync() ?? new List<BairroSolicitacao>();
+        bairroInfos = _selecaoService.GetBairrosAsync() ?? new List<BairroSolicitacao>();
         assuntoInfos = await _selecaoService.GetAssuntosAsync() ?? new List<AssuntoSolicitacao>();
     }
     void OnChange(object value, string name)
