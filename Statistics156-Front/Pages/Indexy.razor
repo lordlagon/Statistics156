@@ -139,9 +139,9 @@
     }
     async Task GetAssuntoPorBairro()
     {
-        AssuntoPorBairro = await _centralService.GetAssuntoPorBairro();
-        if (AssuntoPorBairro != null && AssuntoPorBairro.Any())
-            await jsRunTime.InvokeVoidAsync("GeneratePieChart", "chartdiv", AssuntoPorBairro);
+        //AssuntoPorBairro = await _centralService.QuantidadeSolicitacaoPorBairro();
+        //if (AssuntoPorBairro != null && AssuntoPorBairro.Any())
+          //  await jsRunTime.InvokeVoidAsync("GeneratePieChart", "chartdiv", AssuntoPorBairro);
     }
     async Task GetFaixaEtariaPorAssunto()
     {

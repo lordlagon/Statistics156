@@ -12,14 +12,21 @@
         </div>
     </div>
     <div class="row col-12" style="border: 1px solid blue; padding: 10px">
-        <div class="col col-9 padding: 10px ">
-            <h4>Quantidade de solicitações do mês por bairro </h4>
-            <div id="chartdiv" style="border: 1px solid red;"></div>
-        </div>
+        @if (assuntoInfos.Count == 0)
+        {
+            <div class="spinner"></div>
+        }
+        else
+        {
+            <div class="col col-9 padding: 10px ">
+                <h4>Quantidade de solicitações do mês por bairro </h4>
+                <div id="chartdiv" style="border: 1px solid red;"></div>
+            </div>
+        }
         <div class="col col-3 padding: 10px">
             <h4>Selecione um assunto para modificar o gráfico</h4>
-            <RadzenDropDown AllowClear="true" TValue="string" 
-                            FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" 
+            <RadzenDropDown AllowClear="true" TValue="string"
+                            FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
                             AllowFiltering="true" Style="width:300px"
                             Placeholder="" Data=@assuntoInfos TextProperty="Assunto" ValueProperty="Assunto"
                             Change=@(args => OnChange(args, "assunto")) />
@@ -40,6 +47,7 @@
     string TituloFaixa = string.Empty;
 
     List<AssuntoPorBairro> Top10AssuntosPorBairro = new List<AssuntoPorBairro>();
+    List<BairroPorAssunto> bairroPorAssunto = new List<BairroPorAssunto>();
     List<FaixaEtariaGeneroChart> faixas = new List<FaixaEtariaGeneroChart>();
 
     List<CountAno> analiseTipo = new List<CountAno>();
@@ -49,84 +57,32 @@
         Titulo = "Titulo teste";
         TituloFaixa = "Quantidade de Solicitações por Faixas etárias por Genero Ano 2021";
         await GetSelecoes();
+        await GetAnalisesIniciais();
         await base.OnInitializedAsync();
     }
 
     async Task GenerateChartBlazor()
     {
-        await jsRunTime.InvokeVoidAsync("GenerateColumnChart", "#ColumnChart", Top10AssuntosPorBairro);
+        await jsRunTime.InvokeVoidAsync("GenerateColumnChart", "#ColumnChart", bairroPorAssunto);
     }
 
-    async Task GetChartsInicial()
+    async Task GetAnalisesIniciais()
     {
-        //await GetAssuntoPorBairro();
-        //await GetFaixaEtariaPorAssunto();
+        await QuantidadeSolicitacaoPorBairro(Assunto.Fk_Assunto);
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
-        {
-            //await GetChartsInicial();
-            await GenerateChartBlazor();
-        }
+        await GenerateChartBlazor();
         await base.OnAfterRenderAsync(firstRender);
     }
 
-    //async Task GetBairroPorAssunto(BairroSolicitacao bairro, string ano)
-    //{
-    //    if (string.IsNullOrEmpty(ano))
-    //    {
-    //        ano = "2021";
-    //    }
-    //    AssuntoPorBairro = await _centralService.GetBairroAssuntoAno(bairro.Fk_bairro, ano);
-    //    if (AssuntoPorBairro != null && AssuntoPorBairro.Any())
-    //    {
-    //        Titulo = $"Top 10 Assuntos por Bairro: {bairro.Bairro} Ano: {ano}";
-    //        await jsRunTime.InvokeVoidAsync("GeneratePieChart", "chartdiv", AssuntoPorBairro);
-    //    }
-    //}
-    //async Task GetAssuntoPorBairro()
-    //{
-    //    AssuntoPorBairro = await _centralService.GetAssuntoPorBairro();
-    //    if (AssuntoPorBairro != null && AssuntoPorBairro.Any())
-    //        await jsRunTime.InvokeVoidAsync("GeneratePieChart", "ColumnChart", AssuntoPorBairro);
-    //}
-    //async Task GetFaixaEtariaPorAssunto()
-    //{
-    //    faixas = await _centralService.GetFaixaEtariaGenero(faixasEtarias);
-    //    if (faixas != null && faixas.Any())
-    //    {
-
-    //        await jsRunTime.InvokeVoidAsync("GenerateFaixaEtariaChart", faixas);
-    //    }
-
-    //}
-    //async Task GetFaixaEtariaPorAssunto(AssuntoSolicitacao assunto)
-    //{
-    //    faixas = await _centralService.GetFaixaEtariaGenero(assunto.Fk_Assunto, faixasEtarias);
-    //    if (faixas != null && faixas.Any())
-    //    {
-    //        TituloFaixa = $"Assunto: {assunto.Assunto} por Faixas etárias por Genero Ano {Ano}";
-    //        await jsRunTime.InvokeVoidAsync("GenerateFaixaEtariaChart", faixas);
-    //    }
-
-    //}
-    //async Task GetFaixaEtariaPorRegional(RegionalSolicitacao regional)
-    //{
-    //    faixas = await _centralService.GetFaixaEtariaGeneroRegional(regional, faixasEtarias);
-    //    if (faixas != null && faixas.Any())
-    //    {
-    //        TituloFaixa = $"Regional: {regional} por Faixas etárias por Genero";
-    //        await jsRunTime.InvokeVoidAsync("GenerateFaixaEtariaChart", faixas);
-    //    }
-
-    //}
-
     async Task GetSelecoes()
     {
-        assuntoInfos = await _selecaoService.GetAssuntosAsync() ?? new List<AssuntoSolicitacao>();
+        if (assuntoInfos.Count == 0)
+            assuntoInfos = await _selecaoService.GetAssuntosAsync() ?? new List<AssuntoSolicitacao>();
     }
+
     void Clear()
     {
         TipoSolicitacao Tipo = new TipoSolicitacao();
@@ -136,7 +92,13 @@
         SubdivisaoSolicitacao Subdivisao = new SubdivisaoSolicitacao();
     }
 
-    void OnChange(object value, string name)
+    async Task QuantidadeSolicitacaoPorBairro(string assunto)
+    {
+        bairroPorAssunto.Clear();
+        bairroPorAssunto = await _centralService.QuantidadeSolicitacaoPorBairro(assunto,"Set","2021");
+    }
+
+    async void OnChange(object value, string name)
     {
         Clear();
         var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
@@ -156,6 +118,7 @@
                 //    break;
                 case "assunto":
                     Assunto = assuntoInfos.Where(w => w.Assunto == valor).FirstOrDefault();
+                    await QuantidadeSolicitacaoPorBairro(Assunto.Fk_Assunto);
                     break;
                 //case "subdivisao":
                 //    Subdivisao = subdivisaoInfos.Where(w => w.Subdivisao == valor).FirstOrDefault();
@@ -169,6 +132,7 @@
                 default:
                     break;
             }
+            await GenerateChartBlazor();
         }
     }
 }

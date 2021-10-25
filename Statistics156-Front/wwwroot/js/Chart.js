@@ -182,7 +182,7 @@ function GenerateFaixaEtariaChart(faixas_etarias) {
     });
 }
 
-function GenerateColumnChart(ColumnChart, bairros) {
+function GenerateColumnChart(ColumnChart, bairroPorAssunto) {
     am4core.ready(function () {
 
         // Themes begin
@@ -192,48 +192,12 @@ function GenerateColumnChart(ColumnChart, bairros) {
         // Create chart instance
         var chart = am4core.create("chartdiv", am4charts.XYChart);
 
-        // Add data
-        chart.data = [{
-            "bairro": "XAXIM",
-            "visits": 2025
-        }, {
-                "bairro": "China",
-                "visits": 1882
-            }, {
-            "bairro": "UK",
-            "visits": 1122
-        }, {
-            "bairro": "France",
-            "visits": 1114
-        }, {
-            "bairro": "India",
-            "visits": 984
-        }, {
-            "bairro": "Spain",
-            "visits": 711
-        }, {
-            "bairro": "Netherlands",
-            "visits": 665
-        }, {
-            "bairro": "Russia",
-            "visits": 580
-        }, {
-            "bairro": "South Korea",
-            "visits": 443
-        }, {
-            "bairro": "Canada",
-            "visits": 441
-        }, {
-            "bairro": "Brazil",
-            "visits": 395
-        }];
-
-        // Create axes
-
+        chart.data = bairroPorAssunto;
+       
         var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
         categoryAxis.dataFields.category = "bairro";
         categoryAxis.renderer.grid.template.location = 0;
-        categoryAxis.renderer.minGridDistance = 30;
+        categoryAxis.renderer.minGridDistance = 150;
 
         categoryAxis.renderer.labels.template.adapter.add("dy", function (dy, target) {
             if (target.dataItem && target.dataItem.index & 2 == 2) {
@@ -246,9 +210,9 @@ function GenerateColumnChart(ColumnChart, bairros) {
 
         // Create series
         var series = chart.series.push(new am4charts.ColumnSeries());
-        series.dataFields.valueY = "visits";
+        series.dataFields.valueY = "count"; 
         series.dataFields.categoryX = "bairro";
-        series.name = "Visits";
+        series.name = "Count";
         series.columns.template.tooltipText = "{categoryX}: [bold]{valueY}[/]";
         series.columns.template.fillOpacity = .8;
 

@@ -15,7 +15,7 @@ namespace Statistics156_Front.Services
         Task<List<TopAssunto>> GetTop10Assunto();
         Task<List<TopAssunto>> GetTop10Assunto(BairroSolicitacao bairro);
         Task<List<AssuntoPorBairro>> GetBairroAssuntoAno(string assunto, string ano);
-        Task<List<AssuntoPorBairro>> GetAssuntoPorBairro();
+        Task<List<BairroPorAssunto>> QuantidadeSolicitacaoPorBairro(string assunto, string mes, string ano);
         Task<List<DataAssuntoPorBairro>> GetDataAssuntoPorBairro(string assunto, string bairro);
         Task<List<FaixaEtariaGeneroChart>> GetFaixaEtariaGenero(List<FaixaEtaria> faixasEtarias);
         Task<List<FaixaEtariaGeneroChart>> GetFaixaEtariaGenero(string assunto, List<FaixaEtaria> faixasEtarias);
@@ -119,14 +119,18 @@ namespace Statistics156_Front.Services
             }
         }
 
-        public async Task<List<AssuntoPorBairro>> GetAssuntoPorBairro()
+        public async Task<List<BairroPorAssunto>> QuantidadeSolicitacaoPorBairro(string assunto, string mes, string ano)
         {
             try
             {
+                assunto = string.IsNullOrEmpty(assunto) ? "67" : assunto;
                 var result = await AppConfiguration.BaseUrl
                     .AppendPathSegment("analises")
-                    .AppendPathSegment("bairroAssunto")
-                    .GetJsonAsync<List<AssuntoPorBairro>>();
+                    .AppendPathSegment("assuntoBairroMes")
+                    .AppendPathSegment(assunto)
+                    .AppendPathSegment(mes)
+                    .AppendPathSegment(ano)
+                    .GetJsonAsync<List<BairroPorAssunto>>();
 
                 return result;
             }
