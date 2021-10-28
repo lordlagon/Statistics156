@@ -12,25 +12,34 @@
         </div>
     </div>
     <div class="row col-12" style="border: 1px solid blue; padding: 10px">
-        @if (assuntoInfos.Count == 0)
-        {
-            <div class="spinner"></div>
-        }
-        else
-        {
             <div class="col col-9 padding: 10px ">
                 <h4>Quantidade de solicitações do mês por bairro </h4>
                 <div id="chartdiv" style="border: 1px solid red;"></div>
             </div>
-        }
-        <div class="col col-3 padding: 10px">
-            <h4>Selecione um assunto para modificar o gráfico</h4>
-            <RadzenDropDown AllowClear="true" TValue="string"
-                            FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                            AllowFiltering="true" Style="width:300px"
-                            Placeholder="" Data=@assuntoInfos TextProperty="Assunto" ValueProperty="Assunto"
-                            Change=@(args => OnChange(args, "assunto")) />
-        </div>
+        
+    <div class="col col-3 padding: 10px">
+        <h4>Selecione um assunto para modificar o gráfico</h4>
+        <RadzenDropDown AllowClear="true" TValue="string"
+                        
+                        FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                        AllowFiltering="true" Style="width:300px"
+                        Placeholder="" Data=@assuntoInfos TextProperty="Assunto" ValueProperty="Assunto"
+                        Change=@(args => OnChange(args, "assunto")) />
+
+        <h4 style="font-weight: bold">Mês</h4>
+        <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                        
+                        Data=@(meses.Select(c => c).Distinct())
+                        Change=@(args => OnChange(args, "mes")) />
+        <h4 style="font-weight: bold">Ano</h4>
+        <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                        
+                        Data=@(anos.Select(c => c).Distinct())
+                        Change=@(args => OnChange(args, "ano")) />
+        <p>
+            <button class="btn btn-primary" @onclick="Filtrar">Filtrar</button>
+        </p>
+    </div>
     </div>
 </div>
 @code{
@@ -79,8 +88,18 @@
 
     async Task GetSelecoes()
     {
-        if (assuntoInfos.Count == 0)
-            assuntoInfos = await _selecaoService.GetAssuntosAsync() ?? new List<AssuntoSolicitacao>();
+        assuntoInfos = await _selecaoService.GetAssuntosAsync() ?? new List<AssuntoSolicitacao>();
+        meses = _selecaoService.GetMeses();
+        anos = _selecaoService.GetAnos();
+        Assunto = assuntoInfos.FirstOrDefault(f => f.Fk_Assunto == "67");
+        Mes = meses.FirstOrDefault(f => f.Contains("Set"));
+        Ano = anos.FirstOrDefault(f => f.Contains("2021"));
+    }
+
+    async Task Filtrar()
+    {
+        if (!string.IsNullOrEmpty(Assunto.Assunto))
+            await QuantidadeSolicitacaoPorBairro(Assunto.Fk_Assunto);
     }
 
     void Clear()
@@ -95,7 +114,8 @@
     async Task QuantidadeSolicitacaoPorBairro(string assunto)
     {
         bairroPorAssunto.Clear();
-        bairroPorAssunto = await _centralService.QuantidadeSolicitacaoPorBairro(assunto,"Set","2021");
+        bairroPorAssunto = await _centralService.QuantidadeSolicitacaoPorBairro(assunto, Mes, Ano);
+        // await GenerateChartBlazor();
     }
 
     async void OnChange(object value, string name)
@@ -117,7 +137,8 @@
                 //    Regional = regionalInfos.Where(w => w.Regional == valor).FirstOrDefault();
                 //    break;
                 case "assunto":
-                    Assunto = assuntoInfos.Where(w => w.Assunto == valor).FirstOrDefault();
+                    var i = assuntoInfos.Where(w => w.Assunto == valor);
+                    //Assunto.Fk_Assunto = i.Fk_Assunto;
                     await QuantidadeSolicitacaoPorBairro(Assunto.Fk_Assunto);
                     break;
                 //case "subdivisao":
@@ -132,7 +153,7 @@
                 default:
                     break;
             }
-            await GenerateChartBlazor();
+
         }
     }
 }
