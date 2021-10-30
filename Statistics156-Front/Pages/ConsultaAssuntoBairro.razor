@@ -1,4 +1,4 @@
-﻿@page "/assuntos"
+﻿@page "/assuntos2"
 @using Statistics156_Front.Data;
 @inject Statistics156_Front.Services.ISelecoesService _selecaoService
 @inject Statistics156_Front.Services.ICentralService _centralService
@@ -29,7 +29,7 @@
     <div class="row col-12" style="border: 0px solid blue; padding: 10px">
         <div class="col col-12 padding: 10px">
             <h4 style="font-weight: bold">@Titulo</h4>
-            <div id="chartdivline" style="border: 0px solid red;"></div>
+            <div id="chartdivline" style="border: 1px solid red;"></div>
         </div>
     </div>
 </div>
@@ -50,9 +50,15 @@
         await base.OnInitializedAsync();
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await GenerateChartBlazor();
+        await base.OnAfterRenderAsync(firstRender);
+    }
+
     async Task GenerateChartBlazor()
     {
-        await jsRunTime.InvokeVoidAsync("GenerateLineChart", AssuntoPorBairro);
+        await jsRunTime.InvokeVoidAsync("GenerateFourColumnChart", AssuntoPorBairro);
     }
 
     async Task GetCharts()
@@ -75,7 +81,7 @@
 
     async Task GetSelecoes()
     {
-        bairroInfos = _selecaoService.GetBairrosAsync() ?? new List<BairroSolicitacao>();
+        bairroInfos = _selecaoService.GetBairros() ?? new List<BairroSolicitacao>();
         assuntoInfos = await _selecaoService.GetAssuntosAsync() ?? new List<AssuntoSolicitacao>();
     }
     void OnChange(object value, string name)

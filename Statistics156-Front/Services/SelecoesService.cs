@@ -13,7 +13,9 @@ namespace Statistics156_Front.Services
     public interface ISelecoesService
     {
         Task<List<TipoSolicitacao>> GetTiposAsync();
-        List<BairroSolicitacao> GetBairrosAsync();
+        List<AssuntoSolicitacao> GetAssuntos();
+        List<AssuntoSolicitacao> GetTop10Assuntos();
+        List<BairroSolicitacao> GetBairros();
         Task<List<RegionalSolicitacao>> GetRegionaisAsync();
         Task<List<AssuntoSolicitacao>> GetAssuntosAsync();
         Task<List<SubdivisaoSolicitacao>> GetSubdivisoesAsync();
@@ -24,6 +26,8 @@ namespace Statistics156_Front.Services
     public class SelecoesService : ISelecoesService
     {
         const string bairroJson = "C:\\Sistemas\\TCC\\Central156\\Statistics156-Front\\Data\\bairros.json";
+        const string assuntoJson = "C:\\Sistemas\\TCC\\Central156\\Statistics156-Front\\Data\\assuntos.json";
+        const string assunto10Json = "C:\\Sistemas\\TCC\\Central156\\Statistics156-Front\\Data\\assuntosTop10.json";
         public async Task<List<AssuntoSolicitacao>> GetAssuntosAsync()
         {
             try
@@ -43,7 +47,33 @@ namespace Statistics156_Front.Services
                 return null;
             }
         }
-        public List<BairroSolicitacao> GetBairrosAsync()
+        public List<AssuntoSolicitacao> GetAssuntos()
+        {
+            try
+            {
+                var assuntos = LoadJson<AssuntoSolicitacao>(assuntoJson);
+                return assuntos;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        public List<AssuntoSolicitacao> GetTop10Assuntos()
+        {
+            try
+            {
+                var assuntos = LoadJson<AssuntoSolicitacao>(assunto10Json);
+                return assuntos;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        public List<BairroSolicitacao> GetBairros()
         {
             try
             {

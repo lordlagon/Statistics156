@@ -1,0 +1,1430 @@
+﻿[
+  {
+    "fk_assunto": "2",
+    "assunto": "153 - ATENDIMENTO EXCLUSIVO"
+  },
+  {
+    "fk_assunto": "3",
+    "assunto": "ABORDAGEM SOCIAL DE RUA"
+  },
+  {
+    "fk_assunto": "4",
+    "assunto": "ABORDAGEM SOCIAL DE RUA - ADULTO"
+  },
+  {
+    "fk_assunto": "5",
+    "assunto": "ABORDAGEM SOCIAL DE RUA - ADULTO E IDOSO"
+  },
+  {
+    "fk_assunto": "6",
+    "assunto": "ABORDAGEM SOCIAL DE RUA - CRIANCA"
+  },
+  {
+    "fk_assunto": "7",
+    "assunto": "ACAO VOLUNTARIA"
+  },
+  {
+    "fk_assunto": "8",
+    "assunto": "ACESSIBILIDADE"
+  },
+  {
+    "fk_assunto": "9",
+    "assunto": "ADOLESCENTE APRENDIZ"
+  },
+  {
+    "fk_assunto": "10",
+    "assunto": "AFORAMENTO"
+  },
+  {
+    "fk_assunto": "11",
+    "assunto": "AGENCIA CURITIBA"
+  },
+  {
+    "fk_assunto": "12",
+    "assunto": "AGRICULTURA URBANA"
+  },
+  {
+    "fk_assunto": "13",
+    "assunto": "ALVARA COMERCIAL"
+  },
+  {
+    "fk_assunto": "14",
+    "assunto": "ALVARA DE CONSTRUCAO"
+  },
+  {
+    "fk_assunto": "15",
+    "assunto": "ANIMAIS"
+  },
+  {
+    "fk_assunto": "16",
+    "assunto": "ANIMAIS DOMESTICOS"
+  },
+  {
+    "fk_assunto": "17",
+    "assunto": "ANTIDROGAS"
+  },
+  {
+    "fk_assunto": "18",
+    "assunto": "APLICATIVO CURITIBA 156"
+  },
+  {
+    "fk_assunto": "19",
+    "assunto": "ARMAZEM DA FAMILIA"
+  },
+  {
+    "fk_assunto": "20",
+    "assunto": "ARRUAMENTO"
+  },
+  {
+    "fk_assunto": "21",
+    "assunto": "ARVORE"
+  },
+  {
+    "fk_assunto": "22",
+    "assunto": "ATENDIMENTO"
+  },
+  {
+    "fk_assunto": "23",
+    "assunto": "ATENDIMENTO AO PUBLICO - SMAD"
+  },
+  {
+    "fk_assunto": "24",
+    "assunto": "ATENDIMENTO SME"
+  },
+  {
+    "fk_assunto": "25",
+    "assunto": "ATENDIMENTO SMF"
+  },
+  {
+    "fk_assunto": "26",
+    "assunto": "ATENDIMENTO SOCIAL EM DOMICILIO - CRIANCA"
+  },
+  {
+    "fk_assunto": "27",
+    "assunto": "ATENDIMENTO SOCIAL EM DOMICILIO - IDOSO"
+  },
+  {
+    "fk_assunto": "28",
+    "assunto": "ATENDIMENTO SOCIAL EM DOMICILIO - PESSOA COM DEFICIENCIA"
+  },
+  {
+    "fk_assunto": "29",
+    "assunto": "ATENDIMENTO URBS"
+  },
+  {
+    "fk_assunto": "30",
+    "assunto": "ATIVIDADE FISICA"
+  },
+  {
+    "fk_assunto": "31",
+    "assunto": "ATIVIDADES DE LAZER"
+  },
+  {
+    "fk_assunto": "32",
+    "assunto": "AUTENTICACAO DE SISTEMAS"
+  },
+  {
+    "fk_assunto": "33",
+    "assunto": "AUTORIZACAO PARA COMERCIO EM AREA PUBLICA (AMBULANTE)"
+  },
+  {
+    "fk_assunto": "34",
+    "assunto": "AUTORIZACAO SETRAN (OBRA)"
+  },
+  {
+    "fk_assunto": "35",
+    "assunto": "AVALIACAO DE COMPETENCIAS"
+  },
+  {
+    "fk_assunto": "36",
+    "assunto": "BANCOS EM RUAS"
+  },
+  {
+    "fk_assunto": "37",
+    "assunto": "BIBLIOTECAS ESCOLARES E GIBITECAS"
+  },
+  {
+    "fk_assunto": "38",
+    "assunto": "BIBLIOTECAS TEMATICAS"
+  },
+  {
+    "fk_assunto": "39",
+    "assunto": "BLOQUEIO DE RUA"
+  },
+  {
+    "fk_assunto": "40",
+    "assunto": "BLOQUEIO PARCIAL"
+  },
+  {
+    "fk_assunto": "41",
+    "assunto": "BOSQUES"
+  },
+  {
+    "fk_assunto": "42",
+    "assunto": "CABINE DE INTEGRACAO"
+  },
+  {
+    "fk_assunto": "43",
+    "assunto": "CADASTRAMENTO DE ALUNO"
+  },
+  {
+    "fk_assunto": "44",
+    "assunto": "CADASTRAMENTO DE ALUNO ONLINE"
+  },
+  {
+    "fk_assunto": "45",
+    "assunto": "CADASTRO FUNCIONAL"
+  },
+  {
+    "fk_assunto": "46",
+    "assunto": "CADASTRO UNICO DO GOVERNO FEDERAL"
+  },
+  {
+    "fk_assunto": "47",
+    "assunto": "CAMBIO VERDE"
+  },
+  {
+    "fk_assunto": "48",
+    "assunto": "CAPTACAO DE IMAGENS"
+  },
+  {
+    "fk_assunto": "49",
+    "assunto": "CARGA E DESCARGA"
+  },
+  {
+    "fk_assunto": "50",
+    "assunto": "CARTAO TRANSPORTE"
+  },
+  {
+    "fk_assunto": "51",
+    "assunto": "CARTEIRA DE TRABALHO"
+  },
+  {
+    "fk_assunto": "52",
+    "assunto": "CASA DA MULHER BRASILEIRA"
+  },
+  {
+    "fk_assunto": "53",
+    "assunto": "CEMITERIOS MUNICIPAIS"
+  },
+  {
+    "fk_assunto": "54",
+    "assunto": "CENTRAL DE LIBRAS"
+  },
+  {
+    "fk_assunto": "55",
+    "assunto": "CENTRO DE ATENCAO PSICOSSOCIAL - CAPS"
+  },
+  {
+    "fk_assunto": "56",
+    "assunto": "CENTRO DE EDUCACAO INFANTIL CONTRATADO - CEI CONTRATADO"
+  },
+  {
+    "fk_assunto": "57",
+    "assunto": "CENTRO DE EDUCACAO INFANTIL PARTICULAR - CEI"
+  },
+  {
+    "fk_assunto": "58",
+    "assunto": "CENTRO DE EDUCACAO INFANTIL PARTICULAR - CEI PARTICULAR"
+  },
+  {
+    "fk_assunto": "59",
+    "assunto": "CENTRO MUNICIPAL DE ATENDIMENTO EDUCACIONAL ESPECIALIZADO - CMAEE"
+  },
+  {
+    "fk_assunto": "60",
+    "assunto": "CENTRO MUNICIPAL DE ATENDIMENTO ESPECIALIZADO - CMAE"
+  },
+  {
+    "fk_assunto": "61",
+    "assunto": "CENTRO MUNICIPAL DE EDUCACAO INFANTIL - CMEI"
+  },
+  {
+    "fk_assunto": "62",
+    "assunto": "CERTIDAO NEGATIVA"
+  },
+  {
+    "fk_assunto": "63",
+    "assunto": "CICLOVIA EM PARQUES E BOSQUES"
+  },
+  {
+    "fk_assunto": "64",
+    "assunto": "CICLOVIA EM PRACAS"
+  },
+  {
+    "fk_assunto": "65",
+    "assunto": "CICLOVIA EM RUAS"
+  },
+  {
+    "fk_assunto": "66",
+    "assunto": "COHAB"
+  },
+  {
+    "fk_assunto": "67",
+    "assunto": "COLETA"
+  },
+  {
+    "fk_assunto": "68",
+    "assunto": "COMUNIDADE ESCOLA"
+  },
+  {
+    "fk_assunto": "69",
+    "assunto": "CONCESSOES"
+  },
+  {
+    "fk_assunto": "70",
+    "assunto": "CONCURSOS"
+  },
+  {
+    "fk_assunto": "71",
+    "assunto": "CONCURSOS - URBS"
+  },
+  {
+    "fk_assunto": "72",
+    "assunto": "CONSULTA"
+  },
+  {
+    "fk_assunto": "73",
+    "assunto": "CONSULTA PREVIA DE LOCALIZACAO"
+  },
+  {
+    "fk_assunto": "74",
+    "assunto": "CONTRACHEQUE - RH"
+  },
+  {
+    "fk_assunto": "75",
+    "assunto": "CONTRACHEQUE - SME"
+  },
+  {
+    "fk_assunto": "76",
+    "assunto": "CONTRACHEQUE - SMMA"
+  },
+  {
+    "fk_assunto": "77",
+    "assunto": "CONTRACHEQUE - SMS"
+  },
+  {
+    "fk_assunto": "78",
+    "assunto": "CONTROLE DE BENS IMOVEIS DA PMC"
+  },
+  {
+    "fk_assunto": "79",
+    "assunto": "COPA DO MUNDO FIFA - 2014"
+  },
+  {
+    "fk_assunto": "80",
+    "assunto": "CORONAVIRUS (COVID-19)"
+  },
+  {
+    "fk_assunto": "81",
+    "assunto": "CORRECAO GEOMETRICA"
+  },
+  {
+    "fk_assunto": "82",
+    "assunto": "CORRIDA DE RUA"
+  },
+  {
+    "fk_assunto": "83",
+    "assunto": "COSEDI"
+  },
+  {
+    "fk_assunto": "84",
+    "assunto": "CRAS - CENTRO DE REFERENCIA DA ASSISTENCIA SOCIAL"
+  },
+  {
+    "fk_assunto": "85",
+    "assunto": "CREAS - CENTRO DE REFERENCIA ESPECIALIZADO DA ASSISTENCIA SOCIAL"
+  },
+  {
+    "fk_assunto": "86",
+    "assunto": "CRIANCA QUER FUTURO - NAO QUER ESMOLA"
+  },
+  {
+    "fk_assunto": "87",
+    "assunto": "CRM-AF/SMS"
+  },
+  {
+    "fk_assunto": "88",
+    "assunto": "CURITIBA S/A"
+  },
+  {
+    "fk_assunto": "89",
+    "assunto": "CURSOS E EVENTOS DA EDUCACAO"
+  },
+  {
+    "fk_assunto": "90",
+    "assunto": "DEFESA DE DIREITOS"
+  },
+  {
+    "fk_assunto": "91",
+    "assunto": "DENOMINACAO DE RUAS"
+  },
+  {
+    "fk_assunto": "92",
+    "assunto": "DESAPROPRIACAO"
+  },
+  {
+    "fk_assunto": "93",
+    "assunto": "DIREITOS DA PESSOA COM DEFICIENCIA"
+  },
+  {
+    "fk_assunto": "94",
+    "assunto": "DIREITOS HUMANOS - POLITICA DE IGUALDADE RACIAL"
+  },
+  {
+    "fk_assunto": "95",
+    "assunto": "DIRETO DA ROCA"
+  },
+  {
+    "fk_assunto": "96",
+    "assunto": "DIRETORIA DE URGENCIA E EMERGENCIA"
+  },
+  {
+    "fk_assunto": "97",
+    "assunto": "DISQUE ECONOMIA"
+  },
+  {
+    "fk_assunto": "98",
+    "assunto": "DISQUE SOLIDARIEDADE"
+  },
+  {
+    "fk_assunto": "99",
+    "assunto": "DRENAGEM"
+  },
+  {
+    "fk_assunto": "100",
+    "assunto": "DRENAGEM - MATRIZ"
+  },
+  {
+    "fk_assunto": "101",
+    "assunto": "E-CIDADAO"
+  },
+  {
+    "fk_assunto": "102",
+    "assunto": "EDIFICACOES"
+  },
+  {
+    "fk_assunto": "103",
+    "assunto": "EDUCACAO DE JOVENS E ADULTOS"
+  },
+  {
+    "fk_assunto": "104",
+    "assunto": "EDUCACAO E CIDADANIA NO TRANSITO"
+  },
+  {
+    "fk_assunto": "105",
+    "assunto": "EIXOS DE ANIMACAO"
+  },
+  {
+    "fk_assunto": "106",
+    "assunto": "EMPREENDEDOR/ EMPRESARIO"
+  },
+  {
+    "fk_assunto": "107",
+    "assunto": "EQUIPAMENTOS DE GINASTICA - ACADEMIA AO AR LIVRE"
+  },
+  {
+    "fk_assunto": "108",
+    "assunto": "ESCOLA, CMEI E CMAE"
+  },
+  {
+    "fk_assunto": "109",
+    "assunto": "ESCOLAS MUNICIPAIS"
+  },
+  {
+    "fk_assunto": "110",
+    "assunto": "ESPACO COMERCIAL"
+  },
+  {
+    "fk_assunto": "111",
+    "assunto": "ESPACOS CULTURAIS"
+  },
+  {
+    "fk_assunto": "112",
+    "assunto": "ESPACOS ESPORTIVOS"
+  },
+  {
+    "fk_assunto": "113",
+    "assunto": "ESPORTE ESTUDANTIL"
+  },
+  {
+    "fk_assunto": "114",
+    "assunto": "ESTACAO TUBO"
+  },
+  {
+    "fk_assunto": "115",
+    "assunto": "ESTAR"
+  },
+  {
+    "fk_assunto": "116",
+    "assunto": "ESTAR ELETRONICO"
+  },
+  {
+    "fk_assunto": "117",
+    "assunto": "EVENTOS CULTURAIS"
+  },
+  {
+    "fk_assunto": "118",
+    "assunto": "EVENTOS ESPECIAIS"
+  },
+  {
+    "fk_assunto": "119",
+    "assunto": "EVENTOS ESPECIAIS DE LAZER"
+  },
+  {
+    "fk_assunto": "120",
+    "assunto": "FAIXA DE TRAVESSIA ELEVADA"
+  },
+  {
+    "fk_assunto": "121",
+    "assunto": "FAROL DO SABER DE ESCOLA"
+  },
+  {
+    "fk_assunto": "122",
+    "assunto": "FAROL DO SABER DE PRACA"
+  },
+  {
+    "fk_assunto": "123",
+    "assunto": "FAUNA SINANTROPICA"
+  },
+  {
+    "fk_assunto": "124",
+    "assunto": "FCC"
+  },
+  {
+    "fk_assunto": "125",
+    "assunto": "FEIRA DE ARTESANATO/CASA DO ARTESANATO"
+  },
+  {
+    "fk_assunto": "126",
+    "assunto": "FEIRA DO LITORAL"
+  },
+  {
+    "fk_assunto": "127",
+    "assunto": "FEIRA GASTRONOMICA"
+  },
+  {
+    "fk_assunto": "128",
+    "assunto": "FEIRAS ESPECIAIS"
+  },
+  {
+    "fk_assunto": "129",
+    "assunto": "FEIRAS LIVRES"
+  },
+  {
+    "fk_assunto": "130",
+    "assunto": "FEIRAS LIVRES DIURNAS"
+  },
+  {
+    "fk_assunto": "131",
+    "assunto": "FEIRAS NOTURNAS"
+  },
+  {
+    "fk_assunto": "132",
+    "assunto": "FEIRAS ORGANICAS"
+  },
+  {
+    "fk_assunto": "133",
+    "assunto": "FISCALIZACAO"
+  },
+  {
+    "fk_assunto": "134",
+    "assunto": "FISCALIZACAO DE FUNDO DE VALE (CORREGOS/VALAS)"
+  },
+  {
+    "fk_assunto": "135",
+    "assunto": "FISCALIZACAO DE LOTEAMENTOS IRREGULARES"
+  },
+  {
+    "fk_assunto": "136",
+    "assunto": "FISCALIZACAO DE MOCOS"
+  },
+  {
+    "fk_assunto": "137",
+    "assunto": "FISCALIZACAO DE OBRAS"
+  },
+  {
+    "fk_assunto": "138",
+    "assunto": "FISCALIZACAO DE OBSTRUCAO DE PASSEIO/CALCADA"
+  },
+  {
+    "fk_assunto": "139",
+    "assunto": "FISCALIZACAO DE PUBLICIDADE"
+  },
+  {
+    "fk_assunto": "140",
+    "assunto": "FISCALIZACAO DE SANEAMENTO"
+  },
+  {
+    "fk_assunto": "141",
+    "assunto": "FISCALIZACAO DE TERRENOS BALDIOS OU EDIFICADOS"
+  },
+  {
+    "fk_assunto": "142",
+    "assunto": "FISCALIZACAO DO COMERCIO AMBULANTE"
+  },
+  {
+    "fk_assunto": "143",
+    "assunto": "FISCALIZACAO DO COMERCIO ESTABELECIDO"
+  },
+  {
+    "fk_assunto": "144",
+    "assunto": "FISCALIZACAO URBANA"
+  },
+  {
+    "fk_assunto": "145",
+    "assunto": "FLOREIRAS"
+  },
+  {
+    "fk_assunto": "146",
+    "assunto": "FOLHA DE PAGAMENTO"
+  },
+  {
+    "fk_assunto": "147",
+    "assunto": "FONTES E CHAFARIZES"
+  },
+  {
+    "fk_assunto": "148",
+    "assunto": "FORNECEDORES"
+  },
+  {
+    "fk_assunto": "149",
+    "assunto": "FUNCIONARIOS"
+  },
+  {
+    "fk_assunto": "150",
+    "assunto": "FUNDO DE VALE"
+  },
+  {
+    "fk_assunto": "151",
+    "assunto": "GABINETE"
+  },
+  {
+    "fk_assunto": "152",
+    "assunto": "HOSPITAIS ENSINO/CONTRATUALIZADOS"
+  },
+  {
+    "fk_assunto": "153",
+    "assunto": "ICS"
+  },
+  {
+    "fk_assunto": "154",
+    "assunto": "ILUMINACAO PUBLICA"
+  },
+  {
+    "fk_assunto": "155",
+    "assunto": "ILUMINACAO PUBLICA - VIA PUBLICA"
+  },
+  {
+    "fk_assunto": "156",
+    "assunto": "ILUMINACAO PUBLICA EM LOGRADOUROS PUBLICOS"
+  },
+  {
+    "fk_assunto": "157",
+    "assunto": "IMAP"
+  },
+  {
+    "fk_assunto": "158",
+    "assunto": "INFORMACOES DA REDE INTEGRADA DE TRANSPORTE"
+  },
+  {
+    "fk_assunto": "159",
+    "assunto": "INFRACOES DE TRANSITO"
+  },
+  {
+    "fk_assunto": "160",
+    "assunto": "INFRAESTRUTURA"
+  },
+  {
+    "fk_assunto": "161",
+    "assunto": "INIBIDOR DE AVANCO DE SINAL VERMELHO"
+  },
+  {
+    "fk_assunto": "162",
+    "assunto": "INIBIDOR DE CONVERSAO-RETORNO PROIBIDO"
+  },
+  {
+    "fk_assunto": "163",
+    "assunto": "INIBIDOR DE PARADA NA FAIXA DE PEDESTRE"
+  },
+  {
+    "fk_assunto": "164",
+    "assunto": "INICIACAO ESPORTIVA - PROGRAMA PASE"
+  },
+  {
+    "fk_assunto": "165",
+    "assunto": "INTERNET"
+  },
+  {
+    "fk_assunto": "166",
+    "assunto": "INVASAO"
+  },
+  {
+    "fk_assunto": "167",
+    "assunto": "IPMC"
+  },
+  {
+    "fk_assunto": "168",
+    "assunto": "IPPUC"
+  },
+  {
+    "fk_assunto": "169",
+    "assunto": "IPPUC - SISTEMA VIARIO"
+  },
+  {
+    "fk_assunto": "170",
+    "assunto": "IPTU"
+  },
+  {
+    "fk_assunto": "171",
+    "assunto": "ISENCOES DE TARIFA"
+  },
+  {
+    "fk_assunto": "172",
+    "assunto": "ISS"
+  },
+  {
+    "fk_assunto": "173",
+    "assunto": "ITBI"
+  },
+  {
+    "fk_assunto": "174",
+    "assunto": "ITINERARIO DO TRANSPORTE COLETIVO"
+  },
+  {
+    "fk_assunto": "175",
+    "assunto": "JARDIM BOTANICO"
+  },
+  {
+    "fk_assunto": "176",
+    "assunto": "JARDINETES"
+  },
+  {
+    "fk_assunto": "177",
+    "assunto": "JOVEM TRABALHADOR CURITIBANO"
+  },
+  {
+    "fk_assunto": "178",
+    "assunto": "LARGOS"
+  },
+  {
+    "fk_assunto": "179",
+    "assunto": "LAZER NA CIDADE"
+  },
+  {
+    "fk_assunto": "180",
+    "assunto": "LEI DE INCENTIVO A CULTURA"
+  },
+  {
+    "fk_assunto": "181",
+    "assunto": "LEI DE INCENTIVO AO ESPORTE"
+  },
+  {
+    "fk_assunto": "182",
+    "assunto": "LEI DE INCENTIVO AO ESPORTE E PROMOCAO SOCIAL"
+  },
+  {
+    "fk_assunto": "183",
+    "assunto": "LICEUS DE OFICIOS /CURSOS"
+  },
+  {
+    "fk_assunto": "184",
+    "assunto": "LIMPEZA"
+  },
+  {
+    "fk_assunto": "185",
+    "assunto": "LIMPEZA DE SANITARIOS"
+  },
+  {
+    "fk_assunto": "186",
+    "assunto": "LIMPEZA GERAL"
+  },
+  {
+    "fk_assunto": "187",
+    "assunto": "LINHA TURISMO"
+  },
+  {
+    "fk_assunto": "188",
+    "assunto": "LIXEIRAS EM RUAS"
+  },
+  {
+    "fk_assunto": "189",
+    "assunto": "LOMBADA ELETRONICA"
+  },
+  {
+    "fk_assunto": "190",
+    "assunto": "LOMBADA FISICA"
+  },
+  {
+    "fk_assunto": "191",
+    "assunto": "MACRODRENAGEM"
+  },
+  {
+    "fk_assunto": "192",
+    "assunto": "MANUTENCAO ELETRICA"
+  },
+  {
+    "fk_assunto": "193",
+    "assunto": "MANUTENCAO HIDRAULICA"
+  },
+  {
+    "fk_assunto": "194",
+    "assunto": "MANUTENCAO PREDIAL"
+  },
+  {
+    "fk_assunto": "195",
+    "assunto": "MANUTENCAO TELEFONICA"
+  },
+  {
+    "fk_assunto": "196",
+    "assunto": "MAPAS"
+  },
+  {
+    "fk_assunto": "197",
+    "assunto": "MAPM"
+  },
+  {
+    "fk_assunto": "198",
+    "assunto": "MATERIAIS ESPORTIVOS"
+  },
+  {
+    "fk_assunto": "199",
+    "assunto": "MATERIAL RECREATIVO"
+  },
+  {
+    "fk_assunto": "200",
+    "assunto": "MERCADAO DA FAMILIA"
+  },
+  {
+    "fk_assunto": "201",
+    "assunto": "MERCADAO POPULAR"
+  },
+  {
+    "fk_assunto": "202",
+    "assunto": "MERCADO DE ORGANICOS"
+  },
+  {
+    "fk_assunto": "203",
+    "assunto": "MERCADO FIXO DE ORGANICOS"
+  },
+  {
+    "fk_assunto": "204",
+    "assunto": "MERCADO MUNICIPAL"
+  },
+  {
+    "fk_assunto": "205",
+    "assunto": "MERCADO REGIONAL CAJURU"
+  },
+  {
+    "fk_assunto": "206",
+    "assunto": "MESA SOLIDARIA"
+  },
+  {
+    "fk_assunto": "207",
+    "assunto": "METRO"
+  },
+  {
+    "fk_assunto": "208",
+    "assunto": "MIDIA EMBARCADA - MONITORES"
+  },
+  {
+    "fk_assunto": "209",
+    "assunto": "MINIRROTATORIA"
+  },
+  {
+    "fk_assunto": "210",
+    "assunto": "MOBILIARIO URBANO"
+  },
+  {
+    "fk_assunto": "211",
+    "assunto": "MOBILIDADE URBANA"
+  },
+  {
+    "fk_assunto": "212",
+    "assunto": "MONITORAMENTO"
+  },
+  {
+    "fk_assunto": "213",
+    "assunto": "MOTO-FRETE"
+  },
+  {
+    "fk_assunto": "214",
+    "assunto": "MOTOFRETE"
+  },
+  {
+    "fk_assunto": "215",
+    "assunto": "MOTORISTAS, COBRADORES E DEMAIS FUNCIONARIOS DO TRANSPORTE"
+  },
+  {
+    "fk_assunto": "216",
+    "assunto": "MOTORISTAS, COBRADORES E PORTEIROS"
+  },
+  {
+    "fk_assunto": "217",
+    "assunto": "MUSEU DE HISTORIA NATURAL"
+  },
+  {
+    "fk_assunto": "218",
+    "assunto": "NA"
+  },
+  {
+    "fk_assunto": "219",
+    "assunto": "NATAL"
+  },
+  {
+    "fk_assunto": "220",
+    "assunto": "NOVO MOBILIARIO URBANO"
+  },
+  {
+    "fk_assunto": "221",
+    "assunto": "NUCLEOS REGIONAIS DE SEGURANCA ALIMENTAR E NUTRICIONAL"
+  },
+  {
+    "fk_assunto": "222",
+    "assunto": "NUCLEOS REGIONAIS DO ABASTECIMENTO"
+  },
+  {
+    "fk_assunto": "223",
+    "assunto": "NUMERACAO PREDIAL"
+  },
+  {
+    "fk_assunto": "224",
+    "assunto": "NUTRICAO"
+  },
+  {
+    "fk_assunto": "225",
+    "assunto": "ONIBUS"
+  },
+  {
+    "fk_assunto": "226",
+    "assunto": "ORCAMENTO DE INVESTIMENTO"
+  },
+  {
+    "fk_assunto": "227",
+    "assunto": "ORIENTACOES SANITARIAS PARA RESIDENCIAS"
+  },
+  {
+    "fk_assunto": "228",
+    "assunto": "OUTROS"
+  },
+  {
+    "fk_assunto": "229",
+    "assunto": "OUTROS FUNCIONARIOS DO TRANSPORTE COLETIVO"
+  },
+  {
+    "fk_assunto": "230",
+    "assunto": "OUTROS SETORES SMS"
+  },
+  {
+    "fk_assunto": "231",
+    "assunto": "OUVIDORIA SMS"
+  },
+  {
+    "fk_assunto": "232",
+    "assunto": "PAINEIS DE MENSAGENS VARIAVEIS"
+  },
+  {
+    "fk_assunto": "233",
+    "assunto": "PARALELEPIPEDO"
+  },
+  {
+    "fk_assunto": "234",
+    "assunto": "PARCELAMENTO DO SOLO"
+  },
+  {
+    "fk_assunto": "235",
+    "assunto": "PARCERIA PUBLICO PRIVADA"
+  },
+  {
+    "fk_assunto": "236",
+    "assunto": "PARQUES"
+  },
+  {
+    "fk_assunto": "237",
+    "assunto": "PASSARELA"
+  },
+  {
+    "fk_assunto": "238",
+    "assunto": "PASSARELA DE MADEIRA"
+  },
+  {
+    "fk_assunto": "239",
+    "assunto": "PASSARELA METALICA"
+  },
+  {
+    "fk_assunto": "240",
+    "assunto": "PASSE ESCOLAR"
+  },
+  {
+    "fk_assunto": "241",
+    "assunto": "PASSEIO"
+  },
+  {
+    "fk_assunto": "242",
+    "assunto": "PATRIMONIO ARTISTICO-CULTURAL"
+  },
+  {
+    "fk_assunto": "243",
+    "assunto": "PATRIMONIO HISTORICO"
+  },
+  {
+    "fk_assunto": "244",
+    "assunto": "PATRIMONIO PUBLICO"
+  },
+  {
+    "fk_assunto": "245",
+    "assunto": "PAVILHAO PARQUE BARIGUI"
+  },
+  {
+    "fk_assunto": "246",
+    "assunto": "PAVIMENTACAO"
+  },
+  {
+    "fk_assunto": "247",
+    "assunto": "PAVIMENTACAO ALTERNATIVA - ANTIPO"
+  },
+  {
+    "fk_assunto": "248",
+    "assunto": "PAVIMENTACAO DEFINITIVA"
+  },
+  {
+    "fk_assunto": "249",
+    "assunto": "PAVIMENTO DANIFICADO"
+  },
+  {
+    "fk_assunto": "250",
+    "assunto": "PEDALA CURITIBA"
+  },
+  {
+    "fk_assunto": "251",
+    "assunto": "PERICIA MEDICA"
+  },
+  {
+    "fk_assunto": "252",
+    "assunto": "PLACAS DE NOMENCLATURA DE RUAS"
+  },
+  {
+    "fk_assunto": "253",
+    "assunto": "PLANO DE CARGO E SALARIOS"
+  },
+  {
+    "fk_assunto": "254",
+    "assunto": "POLUICAO"
+  },
+  {
+    "fk_assunto": "255",
+    "assunto": "PONTES DE CONCRETO"
+  },
+  {
+    "fk_assunto": "256",
+    "assunto": "PONTES DE MADEIRA"
+  },
+  {
+    "fk_assunto": "257",
+    "assunto": "PONTO DE ONIBUS"
+  },
+  {
+    "fk_assunto": "258",
+    "assunto": "PONTO DE TAXI"
+  },
+  {
+    "fk_assunto": "259",
+    "assunto": "PONTO DE TRANSPORTE DE ALUGUEL"
+  },
+  {
+    "fk_assunto": "260",
+    "assunto": "PONTOS TURISTICOS"
+  },
+  {
+    "fk_assunto": "261",
+    "assunto": "PORTAL 156"
+  },
+  {
+    "fk_assunto": "262",
+    "assunto": "PORTAL DA TRANSPARENCIA"
+  },
+  {
+    "fk_assunto": "263",
+    "assunto": "PORTAL SME"
+  },
+  {
+    "fk_assunto": "264",
+    "assunto": "POSTO DE SAUDE"
+  },
+  {
+    "fk_assunto": "265",
+    "assunto": "POSTOS DE INFORMACOES TURISTICAS"
+  },
+  {
+    "fk_assunto": "266",
+    "assunto": "PRACAS"
+  },
+  {
+    "fk_assunto": "267",
+    "assunto": "PREFEITO"
+  },
+  {
+    "fk_assunto": "268",
+    "assunto": "PROCURADORIA - DIVIDA ATIVA"
+  },
+  {
+    "fk_assunto": "269",
+    "assunto": "PROFESSORES E FUNCIONARIOS - SMELJ"
+  },
+  {
+    "fk_assunto": "270",
+    "assunto": "PROFISSIONAIS/SERVICOS CREDENCIADOS"
+  },
+  {
+    "fk_assunto": "271",
+    "assunto": "PROGRAMA DIRETO DA ROCA"
+  },
+  {
+    "fk_assunto": "272",
+    "assunto": "PROGRAMA ESPORTE MAIS ESCOLA = 10"
+  },
+  {
+    "fk_assunto": "273",
+    "assunto": "PROGRAMA NOSSA FEIRA"
+  },
+  {
+    "fk_assunto": "274",
+    "assunto": "PROGRAMACAO CULTURAL"
+  },
+  {
+    "fk_assunto": "275",
+    "assunto": "PROGRAMACAO DO TRANSPORTE COLETIVO"
+  },
+  {
+    "fk_assunto": "276",
+    "assunto": "PRONATEC"
+  },
+  {
+    "fk_assunto": "277",
+    "assunto": "PROTECAO AO CIDADAO - GM"
+  },
+  {
+    "fk_assunto": "278",
+    "assunto": "PROTECAO AO PATRIMONIO - GM"
+  },
+  {
+    "fk_assunto": "279",
+    "assunto": "PROTOCOLO E ARQUIVO"
+  },
+  {
+    "fk_assunto": "280",
+    "assunto": "PUBLICIDADE"
+  },
+  {
+    "fk_assunto": "281",
+    "assunto": "QUIOSQUES DE ALIMENTACAO"
+  },
+  {
+    "fk_assunto": "282",
+    "assunto": "RADAR DE VELOCIDADE"
+  },
+  {
+    "fk_assunto": "283",
+    "assunto": "RAMPA PARA PESSOAS COM DEFICIENCIA"
+  },
+  {
+    "fk_assunto": "284",
+    "assunto": "RAMPA PARA PESSOAS COM DEFICIENCIA."
+  },
+  {
+    "fk_assunto": "285",
+    "assunto": "RECAMBIO"
+  },
+  {
+    "fk_assunto": "286",
+    "assunto": "REDE CREDENCIADA"
+  },
+  {
+    "fk_assunto": "287",
+    "assunto": "REDE HOSPITALAR/FEAES"
+  },
+  {
+    "fk_assunto": "288",
+    "assunto": "REDE HOSPITALAR/FEAS"
+  },
+  {
+    "fk_assunto": "289",
+    "assunto": "REDE MUNICIPAL DE ENSINO"
+  },
+  {
+    "fk_assunto": "290",
+    "assunto": "REFEICAO SOLIDARIA"
+  },
+  {
+    "fk_assunto": "291",
+    "assunto": "REFERENCIA LEGISLATIVA"
+  },
+  {
+    "fk_assunto": "292",
+    "assunto": "RELOGIOS DIGITAIS"
+  },
+  {
+    "fk_assunto": "293",
+    "assunto": "RESTAURANTE POPULAR"
+  },
+  {
+    "fk_assunto": "294",
+    "assunto": "RODOVIARIA"
+  },
+  {
+    "fk_assunto": "295",
+    "assunto": "RUA DA CIDADANIA"
+  },
+  {
+    "fk_assunto": "296",
+    "assunto": "S.A.V CRIANCA - ORIENTACAO TELEFONICA"
+  },
+  {
+    "fk_assunto": "297",
+    "assunto": "S.A.V IDOSO - ORIENTACAO TELEFONICA"
+  },
+  {
+    "fk_assunto": "298",
+    "assunto": "SACOLAO DA FAMILIA"
+  },
+  {
+    "fk_assunto": "299",
+    "assunto": "SAIBRO"
+  },
+  {
+    "fk_assunto": "300",
+    "assunto": "SAUDE AMBIENTAL"
+  },
+  {
+    "fk_assunto": "301",
+    "assunto": "SAUDE OCUPACIONAL"
+  },
+  {
+    "fk_assunto": "302",
+    "assunto": "SEGURANCA DE EDIFICACOES E IMOVEIS"
+  },
+  {
+    "fk_assunto": "303",
+    "assunto": "SEGURO DESEMPREGO"
+  },
+  {
+    "fk_assunto": "304",
+    "assunto": "SEMAFORO"
+  },
+  {
+    "fk_assunto": "305",
+    "assunto": "SENTIDO DE TRAFEGO"
+  },
+  {
+    "fk_assunto": "306",
+    "assunto": "SERVICO FUNERARIO MUNICIPAL"
+  },
+  {
+    "fk_assunto": "307",
+    "assunto": "SINALIZACAO  LUMINOSA E/OU SONORA DA LINHA FERREA"
+  },
+  {
+    "fk_assunto": "308",
+    "assunto": "SINALIZACAO DE ESTACIONAMENTO"
+  },
+  {
+    "fk_assunto": "309",
+    "assunto": "SINALIZACAO HORIZONTAL"
+  },
+  {
+    "fk_assunto": "310",
+    "assunto": "SINALIZACAO VERTICAL"
+  },
+  {
+    "fk_assunto": "311",
+    "assunto": "SMDS"
+  },
+  {
+    "fk_assunto": "312",
+    "assunto": "SMDT"
+  },
+  {
+    "fk_assunto": "313",
+    "assunto": "SME"
+  },
+  {
+    "fk_assunto": "314",
+    "assunto": "SMTE"
+  },
+  {
+    "fk_assunto": "315",
+    "assunto": "SUPORTE DE FLOREIRAS EM RUAS"
+  },
+  {
+    "fk_assunto": "316",
+    "assunto": "TAXI"
+  },
+  {
+    "fk_assunto": "317",
+    "assunto": "TELECENTROS COMUNITARIOS"
+  },
+  {
+    "fk_assunto": "318",
+    "assunto": "TERMINAIS/ESTACOES TUBO (OBRAS)"
+  },
+  {
+    "fk_assunto": "319",
+    "assunto": "TERMINAIS/ESTACOES TUBO (PROJETOS)"
+  },
+  {
+    "fk_assunto": "320",
+    "assunto": "TERRAPLENAGEM"
+  },
+  {
+    "fk_assunto": "321",
+    "assunto": "TOTENS MULTIMIDIA"
+  },
+  {
+    "fk_assunto": "322",
+    "assunto": "TRANSITO"
+  },
+  {
+    "fk_assunto": "323",
+    "assunto": "TRANSITO EM ESCOLAS"
+  },
+  {
+    "fk_assunto": "324",
+    "assunto": "TRANSPORTE ACESSO"
+  },
+  {
+    "fk_assunto": "325",
+    "assunto": "TRANSPORTE COLETIVO"
+  },
+  {
+    "fk_assunto": "326",
+    "assunto": "TRANSPORTE COMERCIAL (FRETAMENTO)"
+  },
+  {
+    "fk_assunto": "327",
+    "assunto": "TRANSPORTE ESCOLAR"
+  },
+  {
+    "fk_assunto": "328",
+    "assunto": "TRANSPORTE ESPECIAL SITES"
+  },
+  {
+    "fk_assunto": "329",
+    "assunto": "UNIDADE DE EDUCACAO INTEGRAL - UEI"
+  },
+  {
+    "fk_assunto": "330",
+    "assunto": "UNIDADE DE PRONTO ATENDIMENTO"
+  },
+  {
+    "fk_assunto": "331",
+    "assunto": "UNIDADE DE SAUDE"
+  },
+  {
+    "fk_assunto": "332",
+    "assunto": "UNIDADE DE SAUDE 24H"
+  },
+  {
+    "fk_assunto": "333",
+    "assunto": "VAGAS DE EMPREGO"
+  },
+  {
+    "fk_assunto": "334",
+    "assunto": "VAREJAO CAPAO RASO"
+  },
+  {
+    "fk_assunto": "335",
+    "assunto": "VARRICAO"
+  },
+  {
+    "fk_assunto": "336",
+    "assunto": "VEICULOS PMC"
+  },
+  {
+    "fk_assunto": "337",
+    "assunto": "VEICULOS/MOTORISTAS - SMAD"
+  },
+  {
+    "fk_assunto": "338",
+    "assunto": "VELOCIDADE NA VIA"
+  },
+  {
+    "fk_assunto": "339",
+    "assunto": "VIGILANCIA EM SAUDE AMBIENTAL"
+  },
+  {
+    "fk_assunto": "340",
+    "assunto": "VIGILANCIA EM SAUDE DO TRABALHADOR"
+  },
+  {
+    "fk_assunto": "341",
+    "assunto": "VIGILANCIA SANITARIA"
+  },
+  {
+    "fk_assunto": "342",
+    "assunto": "VIGILANCIA SANITARIA - LEI ANTIFUMO"
+  },
+  {
+    "fk_assunto": "343",
+    "assunto": "VIGILANCIA SANITARIA - REGULACAO SANITARIA"
+  },
+  {
+    "fk_assunto": "344",
+    "assunto": "VIGILANCIA SANITARIA DE ALIMENTOS"
+  },
+  {
+    "fk_assunto": "345",
+    "assunto": "VIGILANCIA SANITARIA DE PRODUTOS"
+  },
+  {
+    "fk_assunto": "346",
+    "assunto": "VIGILANCIA SANITARIA EM ESTABELECIMENTOS"
+  },
+  {
+    "fk_assunto": "347",
+    "assunto": "VIGILANCIA SANITARIA EM HOSPITAIS, CLINICAS  E CONSULTORIOS"
+  },
+  {
+    "fk_assunto": "348",
+    "assunto": "VIGILANCIA SANITARIA SERVICO - ALTO RISCO"
+  },
+  {
+    "fk_assunto": "349",
+    "assunto": "VIGILANCIA SANITARIA SERVICO - FARMACIA"
+  },
+  {
+    "fk_assunto": "350",
+    "assunto": "VIGILANCIA SANITARIA SURTOS"
+  },
+  {
+    "fk_assunto": "351",
+    "assunto": "VIGILANCIAS / DENGUE / ZOONOSES"
+  },
+  {
+    "fk_assunto": "352",
+    "assunto": "VIOLENCIA CONTRA CRIANCA E ADOLESCENTE"
+  },
+  {
+    "fk_assunto": "353",
+    "assunto": "VITRINE SOCIAL"
+  },
+  {
+    "fk_assunto": "354",
+    "assunto": "ZOOLOGICO E PASSEIO PUBLICO"
+  },
+  {
+    "fk_assunto": "355",
+    "assunto": "Aplicativos de transporte"
+  },
+  {
+    "fk_assunto": "356",
+    "assunto": "FEIRA DO LITORAL, FEIRAS GASTRONOMICAS, FEIRAS LIVRES, FEIRAS NOTURNAS, FEIRAS ORGANICAS"
+  },
+  {
+    "fk_assunto": "357",
+    "assunto": "Fiscalizacao de produtos perigosos"
+  },
+  {
+    "fk_assunto": "358",
+    "assunto": "PORTAL SMELJ"
+  }
+]

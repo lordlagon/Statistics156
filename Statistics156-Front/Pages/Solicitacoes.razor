@@ -1,43 +1,44 @@
-﻿@page "/"
+﻿@page "/solicitacoes"
 @using Statistics156_Front.Data;
 @inject Statistics156_Front.Services.ISelecoesService _selecaoService
 @inject Statistics156_Front.Services.ICentralService _centralService
 @inject IJSRuntime jsRunTime;
 
-<div class="container-fluid" style="border: 0px solid red">
-    <div class="row col-12" style="border: 0px solid blue; padding: 10px">
+<div class="container-fluid" style="border: 1px solid red">
+    <div class="row col-12" style="border: 1px solid blue; padding: 10px">
         <div class="col col-9 padding: 10px ">
             <h1 style="font-weight: bold">@Titulo</h1>
             <h4>Seja bem vindo ao Statistics156</h4>
         </div>
     </div>
-    <div class="row col-12" style="border: 0px solid blue; padding: 10px">
-        <div class="col col-9 padding: 10px ">
-            <h4>Quantidade de solicitações do mês por bairro </h4>
-            <div id="chartdiv" style="border: 0px solid red;"></div>
-        </div>
+    <div class="row col-12" style="border: 1px solid blue; padding: 10px">
+            <div class="col col-9 padding: 10px ">
+                <h4>Quantidade de solicitações do mês por bairro </h4>
+                <div id="chartdiv" style="border: 1px solid red;"></div>
+            </div>
+        
+    <div class="col col-3 padding: 10px">
+        <h4>Selecione um assunto para modificar o gráfico</h4>
+        <RadzenDropDown AllowClear="true" TValue="string"
+                        FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                        AllowFiltering="true" Style="width:300px"
+                        Placeholder="" Data=@assuntoInfos TextProperty="Assunto" ValueProperty="Assunto"
+                        Change=@(args => OnChange(args, "assunto")) />
 
-        <div class="col col-3 padding: 10px">
-            <h4>Selecione um assunto para modificar o gráfico</h4>
-            <RadzenDropDown AllowClear="true" TValue="string"
-                            FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                            AllowFiltering="true" Style="width:300px"
-                            Placeholder="" Data=@assuntoInfos TextProperty="Assunto" ValueProperty="Assunto"
-                            Change=@(args => OnChange(args, "assunto")) />
-
-            <h4 style="font-weight: bold">Mês</h4>
-            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
-                            Data=@(meses.Select(c => c).Distinct())
-                            Change=@(args => OnChange(args, "mes")) />
-            <h4 style="font-weight: bold">Ano</h4>
-            <RadzenDropDown AllowClear="true" TValue="string"
-                            Style="width:300px"
-                            Data=@(anos.Select(c => c).Distinct())
-                            Change=@(args => OnChange(args, "ano")) />
-            <p>
-                <button class="btn btn-primary" @onclick="Filtrar">Filtrar</button>
-            </p>
-        </div>
+        <h4 style="font-weight: bold">Mês</h4>
+        <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                        
+                        Data=@(meses.Select(c => c).Distinct())
+                        Change=@(args => OnChange(args, "mes")) />
+        <h4 style="font-weight: bold">Ano</h4>
+        <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                        
+                        Data=@(anos.Select(c => c).Distinct())
+                        Change=@(args => OnChange(args, "ano")) />
+        <p>
+            <button class="btn btn-primary" @onclick="Filtrar">Filtrar</button>
+        </p>
+    </div>
     </div>
 </div>
 @code{
@@ -63,8 +64,8 @@
     {
         Titulo = "Titulo teste";
         TituloFaixa = "Quantidade de Solicitações por Faixas etárias por Genero Ano 2021";
-        //await GetSelecoes();
-        //await GetAnalisesIniciais();
+        await GetSelecoes();
+        await GetAnalisesIniciais();
         await base.OnInitializedAsync();
     }
 
@@ -75,13 +76,13 @@
 
     async Task GetAnalisesIniciais()
     {
-        await Task.Run(async () => await QuantidadeSolicitacaoPorBairro(Assunto.Fk_Assunto).ConfigureAwait(false));
+        await Task.Run(async ()=>await QuantidadeSolicitacaoPorBairro(Assunto.Fk_Assunto).ConfigureAwait(false));
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         await base.OnAfterRenderAsync(firstRender);
-        //await GenerateChartBlazor();
+        await GenerateChartBlazor();
     }
 
     async Task GetSelecoes()

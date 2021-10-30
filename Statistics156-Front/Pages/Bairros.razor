@@ -1,0 +1,114 @@
+﻿@page "/bairros"
+@using Statistics156_Front.Data
+@inject Statistics156_Front.Services.ISelecoesService _selecaoService
+@inject Statistics156_Front.Services.ICentralService _centralService
+@inject NotificationService _notificationService
+@inject IJSRuntime jsRuntime;
+
+<div class="container-fluid">
+    <div class="row col-12" style="border: 0px solid blue; padding: 10px">
+        <div class="col col-9 padding: 10px ">
+            <h1 style="font-weight: bold">Bairros</h1>
+        </div>
+    </div>
+
+    <div class=" row col-12" style="padding:10px">
+        <div class="col col-9 padding: 10px ">
+            <h4>Quantidade de solicitações do mês por bairro </h4>
+            <div id="chartdivline" style="border: 1px solid red;"></div>
+        </div>
+        <div class="col-xl-3 mb-5">
+            <h4>Selecione um assunto</h4>
+            <RadzenDropDown AllowClear="true" TValue="string"
+                            FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                            AllowFiltering="true" Style="width:300px"
+                            Placeholder="" Data=@assuntos TextProperty="Assunto" ValueProperty="Assunto"
+                            Change=@(args => OnChangeAssunto(args, "assuntos")) />
+            <h4>Selecione três bairros </h4>
+            <RadzenListBox AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                           @bind-Value=@multipleValues Multiple="true" Data=@bairros
+                           TextProperty="Bairro" ValueProperty="Fk_bairro" Change=@(args => OnChangeBairro(args, "bairros")) Style="height:400px" />
+            <p><button class="btn btn-primary" @onclick="Filtrar">Filtrar</button></p>
+        </div>
+    </div>
+</div>
+@code {
+
+    IEnumerable<BairroSolicitacao> bairros;
+    IEnumerable<AssuntoSolicitacao> assuntos;
+    AssuntoSolicitacao assuntoSelecionado;
+    List<BairroSolicitacao> bairrosSelecionados;
+    IEnumerable<string> multipleValues;
+
+    protected override void OnInitialized()
+    {
+        bairrosSelecionados = new List<BairroSolicitacao>();
+        assuntoSelecionado = new AssuntoSolicitacao();
+        multipleValues = new string[] { "5", "16", "30" };
+        bairros = _selecaoService.GetBairros() ?? new List<BairroSolicitacao>();
+        assuntos = _selecaoService.GetTop10Assuntos() ?? new List<AssuntoSolicitacao>();
+    }
+
+    async Task Filtrar()
+    {
+        bairrosSelecionados.Clear();
+        var query = bairros.AsQueryable();
+
+        foreach (var item in multipleValues)
+        {
+            var list = query.Where(c => c.Fk_bairro == item.ToString()).ToList();
+            bairrosSelecionados.AddRange(list);
+        }
+
+        await GetAnalise(bairrosSelecionados, assuntoSelecionado);
+
+    }
+    async Task GetAnalise(List<BairroSolicitacao> bairros, AssuntoSolicitacao assunto)
+    {
+        if (bairros.Count > 3)
+        {
+            ShowNotification(new NotificationMessage() { Summary = "Selecione no máximo 3 bairros" });
+            return;
+        }
+        if (string.IsNullOrEmpty(assunto.Assunto))
+        {
+            ShowNotification(new NotificationMessage() { Summary = "Selecione um assunto" });
+            return;
+        }
+
+        await GenerateChartBlazor();
+    }
+    async Task GenerateChartBlazor()
+    {
+        await jsRuntime.InvokeVoidAsync("GenerateFourColumnChart", bairrosSelecionados);
+    }
+
+    void OnChangeBairro(object value, string name)
+    {
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+    }
+    void OnChangeAssunto(object value, string name)
+    {
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+        assuntoSelecionado = assuntos.AsQueryable().Where(c => c.Assunto == str as string).FirstOrDefault();
+    }
+
+    void OnLoadData(LoadDataArgs args)
+    {
+        var query = bairros.AsQueryable();
+
+        if (!string.IsNullOrEmpty(args.Filter))
+        {
+            query = query.Where(c => c.Fk_bairro.Contains(args.Filter) || c.Bairro.Contains(args.Filter));
+        }
+
+        bairrosSelecionados = query.ToList();
+
+        InvokeAsync(StateHasChanged);
+    }
+
+    void ShowNotification(NotificationMessage message)
+    {
+        _notificationService.Notify(message);
+    }
+}

@@ -24,11 +24,9 @@ class GetbairroAssunto(Resource):
         query = "SELECT T.fk_assunto, assunto, bairro, mes, ano FROM olap_156.fato_central156 C inner join dim_assunto T inner join dim_bairro2 B inner join dim_Data D where C.FK_bairro = B.FK_bairro and C.FK_Assunto = T.FK_Assunto and C.FK_Data = D.FK_Data and C.FK_assunto = '{}' and mes = '{}' and ano = '{}'".format(assunto, mes, ano)
         df = pd.read_sql(query, mydb)
         gdf = df.groupby(['bairro','assunto','ano']).size().reset_index(name='count')
-        print(gdf)
         mdf = gdf.sort_values(by='count', ascending=False)
         result = mdf.to_json(orient="records")
         parsed = json.loads(result)
-        
         for item in parsed:
             BAIRRO_POR_ASSUNTOS.append(item)
         mydb.close()

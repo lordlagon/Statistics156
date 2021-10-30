@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30128.74
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Central156", "Central156\Central156.csproj", "{FC005D8F-AF84-41F8-BAAD-BD79284B677E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Statistics156-Front", "Statistics156-Front\Statistics156-Front.csproj", "{B10669B4-0E90-4102-94CA-771A29B9E910}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Statistics156-Front", "Statistics156-Front\Statistics156-Front.csproj", "{B10669B4-0E90-4102-94CA-771A29B9E910}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

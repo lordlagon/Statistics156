@@ -1,0 +1,42 @@
+﻿[
+  {
+    "fk_assunto": "21",
+    "assunto": "ARVORE"
+  },
+  {
+    "fk_assunto": "67",
+    "assunto": "COLETA"
+  },
+  {
+    "fk_assunto": "322",
+    "assunto": "TRANSITO"
+  },
+  {
+    "fk_assunto": "5",
+    "assunto": "ABORDAGEM SOCIAL DE RUA - ADULTO E IDOSO"
+  },
+  {
+    "fk_assunto": "155",
+    "assunto": "ILUMINACAO PUBLICA - VIA PUBLICA"
+  },
+  {
+    "fk_assunto": "264",
+    "assunto": "POSTO DE SAUDE"
+  },
+  {
+    "fk_assunto": "246",
+    "assunto": "PAVIMENTACAO"
+  },
+  {
+    "fk_assunto": "16",
+    "assunto": "ANIMAIS DOMESTICOS"
+  },
+  {
+    "fk_assunto": "241",
+    "assunto": "PASSEIO"
+  },
+  {
+    "fk_assunto": "215",
+    "assunto": "MOTORISTAS, COBRADORES E DEMAIS FUNCIONARIOS DO TRANSPORTE"
+  }
+]
