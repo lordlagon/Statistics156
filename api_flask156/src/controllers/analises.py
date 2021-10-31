@@ -10,6 +10,25 @@ app, api = server.app, server.api
 
 ns = api.namespace('analises', description='Api das analises da central 156')
 
+@ns.route('/faixaetariagenero/<regional>')
+@api.param('<regional>')
+class GetFaixaEtariaGenero(Resource):
+    @api.doc('list_faixaEtariaGenero')
+    @api.marshal_list_with(faixa_etaria_genero)
+    def get(self, regional):
+        mydb.connect()
+        FAIXAS_ETARIAS_GENEROS = []
+        query = "SELECT genero, faixa_etaria FROM olap_156.fato_central156 C inner join dim_assunto A inner join dim_genero G inner join dim_Data D inner join dim_faixa_etaria_ibge F inner join dim_regional R where F.FK_Faixa_Etaria_ibge = C.FK_Faixa_Etaria_ibge and C.Fk_genero = G.fk_genero and C.FK_Assunto = A.FK_Assunto and C.FK_Data = D.FK_Data and C.FK_Regional = R.FK_Regional and F.FK_Faixa_Etaria_ibge != 20 and ano = 2021 and R.FK_Regional = '{}'".format(regional)
+        df = pd.read_sql(query, mydb)
+        gdf = df.groupby(['faixa_etaria','genero']).size().reset_index(name='count')
+        mdf = gdf.sort_values(by='count', ascending=False)
+        result = mdf.to_json(orient="records")
+        parsed = json.loads(result)
+        for item in parsed:
+            FAIXAS_ETARIAS_GENEROS.append(item)
+        mydb.close()
+        return FAIXAS_ETARIAS_GENEROS
+
 
 @ns.route('/assuntoBairroMes/<assunto>/<mes>/<ano>')
 @api.param('<assunto>')
@@ -186,13 +205,6 @@ class GetbairroAssunto(Resource):
             BAIRRO_POR_ASSUNTOS.append(item)
         return BAIRRO_POR_ASSUNTOS
 
-FAIXAS_ETARIAS_GENEROS = []
-
-faixa_etaria_genero = api.model('faixaetariagenero', {
-    'count': fields.Integer(),
-    'faixa_etaria': fields.String(description='nome do Assunto'),
-    'genero': fields.String(description='nome do Assunto')
-})
 
 @api.route('/faixaetariagenero/<assunto>')
 @api.param('<assunto>')
@@ -234,7 +246,7 @@ class GetFaixaEtariaGenero(Resource):
             FAIXAS_ETARIAS_GENEROS.append(item)
         return FAIXAS_ETARIAS_GENEROS
 
-@api.route('/faixaetariagenero')
+@ns.route('/faixaetariagenero')
 class GetFaixaEtariaGenero(Resource):
     @api.doc('list_faixaEtariaGenero')
     @api.marshal_list_with(faixa_etaria_genero)

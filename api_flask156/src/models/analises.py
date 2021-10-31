@@ -46,3 +46,9 @@ topAssuntos = api.model('topassuntos', {
     'ano': fields.Integer(),
     'count': fields.Integer()
 })
+FAIXAS_ETARIAS_GENEROS = []
+faixa_etaria_genero = api.model('faixaetariagenero', {
+    'count': fields.Integer(),
+    'faixa_etaria': fields.String(description='nome do Assunto'),
+    'genero': fields.String(description='nome do Assunto')
+})

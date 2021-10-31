@@ -1,0 +1,42 @@
+﻿[
+  {
+    "fk_regional": "2",
+    "regional": "Unidade Regional Bairro Novo"
+  },
+  {
+    "fk_regional": "3",
+    "regional": "Unidade Regional Boa Vista"
+  },
+  {
+    "fk_regional": "4",
+    "regional": "Unidade Regional Boqueirao"
+  },
+  {
+    "fk_regional": "5",
+    "regional": "Unidade Regional Cajuru"
+  },
+  {
+    "fk_regional": "6",
+    "regional": "Unidade Regional CIC"
+  },
+  {
+    "fk_regional": "7",
+    "regional": "Unidade Regional Matriz"
+  },
+  {
+    "fk_regional": "8",
+    "regional": "Unidade Regional Pinheirinho"
+  },
+  {
+    "fk_regional": "9",
+    "regional": "Unidade Regional Portao"
+  },
+  {
+    "fk_regional": "10",
+    "regional": "Unidade Regional Santa Felicidade"
+  },
+  {
+    "fk_regional": "11",
+    "regional": "Unidade Regional Tatuquara"
+  }
+]

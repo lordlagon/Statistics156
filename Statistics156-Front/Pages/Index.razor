@@ -7,150 +7,28 @@
 <div class="container-fluid" style="border: 0px solid red">
     <div class="row col-12" style="border: 0px solid blue; padding: 10px">
         <div class="col col-9 padding: 10px ">
-            <h1 style="font-weight: bold">@Titulo</h1>
-            <h4>Seja bem vindo ao Statistics156</h4>
+            <h1 style="font-weight: bold">Statistics 156</h1>
         </div>
-    </div>
-    <div class="row col-12" style="border: 0px solid blue; padding: 10px">
-        <div class="col col-9 padding: 10px ">
-            <h4>Quantidade de solicitações do mês por bairro </h4>
-            <div id="chartdiv" style="border: 0px solid red;"></div>
-        </div>
-
-        <div class="col col-3 padding: 10px">
-            <h4>Selecione um assunto para modificar o gráfico</h4>
-            <RadzenDropDown AllowClear="true" TValue="string"
-                            FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                            AllowFiltering="true" Style="width:300px"
-                            Placeholder="" Data=@assuntoInfos TextProperty="Assunto" ValueProperty="Assunto"
-                            Change=@(args => OnChange(args, "assunto")) />
-
-            <h4 style="font-weight: bold">Mês</h4>
-            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
-                            Data=@(meses.Select(c => c).Distinct())
-                            Change=@(args => OnChange(args, "mes")) />
-            <h4 style="font-weight: bold">Ano</h4>
-            <RadzenDropDown AllowClear="true" TValue="string"
-                            Style="width:300px"
-                            Data=@(anos.Select(c => c).Distinct())
-                            Change=@(args => OnChange(args, "ano")) />
+        <div class="col col-12 padding: 10px ">
             <p>
-                <button class="btn btn-primary" @onclick="Filtrar">Filtrar</button>
+                <h3>
+                    Nosso objetivo é tornar os dados que você registra na Central 156, mais evidentes e claros.
+                    Assim você poderá analisar as estatísticas do seu bairro ou regional.
+                </h3>
             </p>
         </div>
+        <div class="col col-12 padding: 10px">
+            <p><h4>Como Funciona?</h4>
+            <h3> •  Após o registro de uma solicitação na Central 156, os dados são enviados para uma base que é disponibilizada para a população através do link: <a href="https://www.curitiba.pr.gov.br/dadosabertos/busca/"> www.curitiba.pr.gov.br/dadosabertos/busca/ </a> </h3>
+            <h3> •  Esses dados ficam disponives em formato de planilhas, o que dificulta o entendimento para um cidadão mais leigo.</h3>
+            <h3> •	A Statistics 156, desenvolveu uma aplicação que pega esses dados da Central 156, através de mineração de dados, organiza e trata e salva esses dados.</h3>
+            <h3> •	E disponibilizamos os dashboards com os filtros para facilitar o acesso aos cidadões. </h3>
+            </p>
+        </div>
+
+
     </div>
 </div>
 @code{
 
-    List<AssuntoSolicitacao> assuntoInfos = new List<AssuntoSolicitacao>();
-    AssuntoSolicitacao Assunto = new AssuntoSolicitacao();
-
-    string[] meses = new string[] { string.Empty };
-    string[] anos = new string[] { string.Empty };
-
-    string Mes = string.Empty;
-    string Ano = string.Empty;
-    string Titulo = string.Empty;
-    string TituloFaixa = string.Empty;
-
-    List<AssuntoPorBairro> Top10AssuntosPorBairro = new List<AssuntoPorBairro>();
-    List<BairroPorAssunto> bairroPorAssunto = new List<BairroPorAssunto>();
-    List<FaixaEtariaGeneroChart> faixas = new List<FaixaEtariaGeneroChart>();
-
-    List<CountAno> analiseTipo = new List<CountAno>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        Titulo = "Titulo teste";
-        TituloFaixa = "Quantidade de Solicitações por Faixas etárias por Genero Ano 2021";
-        //await GetSelecoes();
-        //await GetAnalisesIniciais();
-        await base.OnInitializedAsync();
-    }
-
-    async Task GenerateChartBlazor()
-    {
-        await jsRunTime.InvokeVoidAsync("GenerateColumnChart", "#ColumnChart", bairroPorAssunto);
-    }
-
-    async Task GetAnalisesIniciais()
-    {
-        await Task.Run(async () => await QuantidadeSolicitacaoPorBairro(Assunto.Fk_Assunto).ConfigureAwait(false));
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        await base.OnAfterRenderAsync(firstRender);
-        //await GenerateChartBlazor();
-    }
-
-    async Task GetSelecoes()
-    {
-        assuntoInfos = await _selecaoService.GetAssuntosAsync() ?? new List<AssuntoSolicitacao>();
-        meses = _selecaoService.GetMeses();
-        anos = _selecaoService.GetAnos();
-        Assunto = assuntoInfos.FirstOrDefault(f => f.Fk_Assunto == "67");
-        Mes = meses.FirstOrDefault(f => f.Contains("Set"));
-        Ano = anos.FirstOrDefault(f => f.Contains("2021"));
-    }
-
-    async Task Filtrar()
-    {
-        if (!string.IsNullOrEmpty(Assunto.Assunto))
-            await QuantidadeSolicitacaoPorBairro(Assunto.Fk_Assunto);
-    }
-
-    void Clear()
-    {
-        TipoSolicitacao Tipo = new TipoSolicitacao();
-        BairroSolicitacao Bairro = new BairroSolicitacao();
-        AssuntoSolicitacao Assunto = new AssuntoSolicitacao();
-        RegionalSolicitacao Regional = new RegionalSolicitacao();
-        SubdivisaoSolicitacao Subdivisao = new SubdivisaoSolicitacao();
-    }
-
-    async Task QuantidadeSolicitacaoPorBairro(string assunto)
-    {
-        bairroPorAssunto.Clear();
-        bairroPorAssunto = await _centralService.QuantidadeSolicitacaoPorBairro(assunto, Mes, Ano);
-        // await GenerateChartBlazor();
-    }
-
-    async void OnChange(object value, string name)
-    {
-        Clear();
-        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
-        if (str is string valor)
-        {
-            switch (name)
-            {
-                //case "tipo":
-                //    Tipo = tipoInfos.Where(w => w.Tipo == valor).FirstOrDefault();
-                //    Console.WriteLine(Tipo.Fk_Tipo);
-                //    break;
-                //case "bairro":
-                //    Bairro = bairroInfos.Where(w => w.Bairro == valor).FirstOrDefault();
-                //    break;
-                //case "regional":
-                //    Regional = regionalInfos.Where(w => w.Regional == valor).FirstOrDefault();
-                //    break;
-                case "assunto":
-                    Assunto = assuntoInfos.Where(w => w.Assunto == valor).FirstOrDefault();
-                    await QuantidadeSolicitacaoPorBairro(Assunto.Fk_Assunto);
-                    break;
-                //case "subdivisao":
-                //    Subdivisao = subdivisaoInfos.Where(w => w.Subdivisao == valor).FirstOrDefault();
-                //    break;
-                case "ano":
-                    Ano = valor;
-                    break;
-                case "mes":
-                    Mes = valor;
-                    break;
-                default:
-                    break;
-            }
-
-        }
-    }
 }

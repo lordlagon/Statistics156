@@ -14,8 +14,8 @@
 
     <div class=" row col-12" style="padding:10px">
         <div class="col col-9 padding: 10px ">
-            <h4>Quantidade de solicitações do mês por bairro </h4>
-            <div id="chartdivline" style="border: 1px solid red;"></div>
+            <h4>Quantidade de solicitações dos ultimos 4 meses por bairro </h4>
+            <div id="chartdivline" style="border: 0px solid red;"></div>
         </div>
         <div class="col-xl-3 mb-5">
             <h4>Selecione um assunto</h4>
@@ -36,15 +36,15 @@
 
     IEnumerable<BairroSolicitacao> bairros;
     IEnumerable<AssuntoSolicitacao> assuntos;
+    IEnumerable<string> multipleValues;
     AssuntoSolicitacao assuntoSelecionado;
     List<BairroSolicitacao> bairrosSelecionados;
-    IEnumerable<string> multipleValues;
 
     protected override void OnInitialized()
     {
         bairrosSelecionados = new List<BairroSolicitacao>();
         assuntoSelecionado = new AssuntoSolicitacao();
-        multipleValues = new string[] { "5", "16", "30" };
+        multipleValues = new string[] { "5","16","30" };
         bairros = _selecaoService.GetBairros() ?? new List<BairroSolicitacao>();
         assuntos = _selecaoService.GetTop10Assuntos() ?? new List<AssuntoSolicitacao>();
     }
@@ -65,11 +65,12 @@
     }
     async Task GetAnalise(List<BairroSolicitacao> bairros, AssuntoSolicitacao assunto)
     {
-        if (bairros.Count > 3)
+        if (bairros.Count != 3)
         {
-            ShowNotification(new NotificationMessage() { Summary = "Selecione no máximo 3 bairros" });
+            ShowNotification(new NotificationMessage() { Summary = "Selecione 3 bairros" });
             return;
         }
+
         if (string.IsNullOrEmpty(assunto.Assunto))
         {
             ShowNotification(new NotificationMessage() { Summary = "Selecione um assunto" });

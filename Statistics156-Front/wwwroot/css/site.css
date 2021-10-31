@@ -115,7 +115,10 @@ body {
     width: 100%;
     height: 500px;
 }
-
+#chartdivGroup {
+    width: 100%;
+    height: 800px;
+}
 #ColumnChart {
     width: 100%;
     height: 800px;

@@ -1,33 +1,32 @@
-﻿@page "/top10"
-@using Statistics156_Front.Data;
+﻿@page "/idade"
+@using Statistics156_Front.Data
 @inject Statistics156_Front.Services.ISelecoesService _selecaoService
 @inject Statistics156_Front.Services.ICentralService _centralService
 @inject NotificationService _notificationService
-@inject IJSRuntime jsRunTime;
+@inject IJSRuntime jsRuntime;
 
-<div class="container-fluid" style="border: 0px solid red">
+<div class="container-fluid">
     <div class="row col-12" style="border: 0px solid blue; padding: 10px">
         <div class=" col col-9 padding: 10px">
             <h1 style="font-weight: bold">Faixas Etárias por Regional</h1>
-            <h4>Faixa etária dos solicitantes por regional</h4>
         </div>
     </div>
-    <div class="col-12" style="padding:10px">
-        <h4>Selecione uma regional</h4>
-        <RadzenDropDown AllowClear="true" TValue="string"
-                        FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
-                        AllowFiltering="true" Style="width:300px"
-                        Placeholder="" Data=@regionais TextProperty="Regional" ValueProperty="Fk_Regional"
-                        Change=@(args => OnChangeRegional(args, "regionais")) />
-        <p><button class="btn btn-primary" @onclick="Filtrar">Filtrar</button></p>
-    </div>
     <div class=" row col-12" style="padding:10px">
-        <div class="col col-12 padding: 10px ">
-            <div id="chartdivGroup" style="border: 0px solid red;"></div>
+        <div class="col col-9 padding: 10px ">
+            <h4>Faixa etária dos solicitantes por regional</h4>
+            <div id="chartdivFaixa" style="border: 0px solid red;"></div>
+        </div>
+        <div class="col-xl-3 mb-5">
+            <h4>Selecione uma regional</h4>
+            <RadzenDropDown AllowClear="true" TValue="string"
+                            FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive"
+                            AllowFiltering="true" Style="width:300px"
+                            Placeholder="" Data=@regionais TextProperty="Regional" ValueProperty="Fk_Regional"
+                            Change=@(args => OnChangeRegional(args, "regionais")) />
+            <p><button class="btn btn-primary" @onclick="Filtrar">Filtrar</button></p>
         </div>
     </div>
 </div>
->
 @code {
     IEnumerable<RegionalSolicitacao> regionais;
     RegionalSolicitacao regionalSelecionada;
@@ -54,7 +53,7 @@
     }
     async Task GenerateChartBlazor()
     {
-        await jsRunTime.InvokeVoidAsync("GenerateGroupChart");
+        await jsRuntime.InvokeVoidAsync("GenerateFaixaEtariaChart", "");
     }
 
     void OnChangeRegional(object value, string name)

@@ -14,6 +14,7 @@ namespace Statistics156_Front.Services
     {
         Task<List<TipoSolicitacao>> GetTiposAsync();
         List<AssuntoSolicitacao> GetAssuntos();
+        List<RegionalSolicitacao> GetRegionais();
         List<AssuntoSolicitacao> GetTop10Assuntos();
         List<BairroSolicitacao> GetBairros();
         Task<List<RegionalSolicitacao>> GetRegionaisAsync();
@@ -25,9 +26,7 @@ namespace Statistics156_Front.Services
     }
     public class SelecoesService : ISelecoesService
     {
-        const string bairroJson = "C:\\Sistemas\\TCC\\Central156\\Statistics156-Front\\Data\\bairros.json";
-        const string assuntoJson = "C:\\Sistemas\\TCC\\Central156\\Statistics156-Front\\Data\\assuntos.json";
-        const string assunto10Json = "C:\\Sistemas\\TCC\\Central156\\Statistics156-Front\\Data\\assuntosTop10.json";
+        
         public async Task<List<AssuntoSolicitacao>> GetAssuntosAsync()
         {
             try
@@ -51,7 +50,7 @@ namespace Statistics156_Front.Services
         {
             try
             {
-                var assuntos = LoadJson<AssuntoSolicitacao>(assuntoJson);
+                var assuntos = LoadJson<AssuntoSolicitacao>(AppConfiguration.assuntoJson);
                 return assuntos;
             }
             catch (Exception ex)
@@ -64,7 +63,7 @@ namespace Statistics156_Front.Services
         {
             try
             {
-                var assuntos = LoadJson<AssuntoSolicitacao>(assunto10Json);
+                var assuntos = LoadJson<AssuntoSolicitacao>(AppConfiguration.assunto10Json);
                 return assuntos;
             }
             catch (Exception ex)
@@ -77,7 +76,7 @@ namespace Statistics156_Front.Services
         {
             try
             {
-                var bairros = LoadJson<BairroSolicitacao>(bairroJson);
+                var bairros = LoadJson<BairroSolicitacao>(AppConfiguration.bairroJson);
                 return bairros;
             }
             catch (Exception ex)
@@ -86,6 +85,21 @@ namespace Statistics156_Front.Services
                 return null;
             }
         }
+        public List<RegionalSolicitacao> GetRegionais()
+        {
+            try
+            {
+                var regionais = LoadJson<RegionalSolicitacao>(AppConfiguration.regionalJson);
+                return regionais;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+        }
+
+
 
         public async Task<List<RegionalSolicitacao>> GetRegionaisAsync()
         {
