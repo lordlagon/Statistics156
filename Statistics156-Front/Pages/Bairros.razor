@@ -39,10 +39,13 @@
     IEnumerable<string> multipleValues;
     AssuntoSolicitacao assuntoSelecionado;
     List<BairroSolicitacao> bairrosSelecionados;
+    Chart4BairrosAssunto chartAssuntoBairros;
+
 
     protected override void OnInitialized()
     {
         bairrosSelecionados = new List<BairroSolicitacao>();
+        chartAssuntoBairros = new Chart4BairrosAssunto();
         assuntoSelecionado = new AssuntoSolicitacao();
         multipleValues = new string[] { "5","16","30" };
         bairros = _selecaoService.GetBairros() ?? new List<BairroSolicitacao>();
@@ -76,12 +79,13 @@
             ShowNotification(new NotificationMessage() { Summary = "Selecione um assunto" });
             return;
         }
-
-        await GenerateChartBlazor();
+        chartAssuntoBairros = await _centralService.GetAssuntoBairros(bairros, assunto);
+        if(chartAssuntoBairros != null)
+            await GenerateChartBlazor();
     }
     async Task GenerateChartBlazor()
     {
-        await jsRuntime.InvokeVoidAsync("GenerateFourColumnChart", bairrosSelecionados);
+        await jsRuntime.InvokeVoidAsync("GenerateFourColumnChart", chartAssuntoBairros);
     }
 
     void OnChangeBairro(object value, string name)

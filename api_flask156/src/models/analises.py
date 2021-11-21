@@ -52,3 +52,9 @@ faixa_etaria_genero = api.model('faixaetariagenero', {
     'faixa_etaria': fields.String(description='nome do Assunto'),
     'genero': fields.String(description='nome do Assunto')
 })
+SOLICITACOES4MESBAIRRO = []
+solicitacao_bairros = api.model('solicitacaobairros', {
+    'FK_bairro': fields.Integer(),
+    'mes': fields.String(),
+    'count': fields.Integer(),
+})

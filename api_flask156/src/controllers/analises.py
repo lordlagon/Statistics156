@@ -10,6 +10,30 @@ app, api = server.app, server.api
 
 ns = api.namespace('analises', description='Api das analises da central 156')
 
+@ns.route('/bairros/<assunto>/<bairro1>/<bairro2>/<bairro3>')
+@api.param('<assunto>')
+@api.param('<bairro1>')
+@api.param('<bairro2>')
+@api.param('<bairro3>')
+class GetSolicitacaoBairros(Resource):
+    @api.doc('SolicitacaoBairros')
+    @api.marshal_list_with(solicitacao_bairros)
+    def get(self, assunto, bairro1, bairro2, bairro3 ):
+        mydb.connect()
+        SOLICITACOES4MESBAIRRO = []
+        query = "SELECT C.FK_bairro, bairro, mes FROM olap_156.fato_central156 C inner join dim_assunto A inner join dim_bairro2 B inner join dim_Data D where C.FK_Assunto = A.FK_Assunto and C.FK_Data = D.FK_Data and C.FK_Bairro = B.FK_Bairro and C.FK_assunto = '{}' and ano = 2021".format(assunto)
+        df = pd.read_sql(query, mydb)
+        gdf = df.groupby(['FK_bairro','bairro','mes']).size().reset_index(name='count')
+        rdf1 = gdf.query("(mes == 'Set' or mes == 'Ago' or mes == 'Jul' or mes == 'Jun' ) and (FK_bairro == {} or FK_bairro == {} or FK_bairro == {} )".format(bairro1, bairro2, bairro3))
+        print(rdf1)
+        result = rdf1.to_json(orient="records")
+        parsed = json.loads(result)
+        print(parsed)
+        for item in parsed:
+            SOLICITACOES4MESBAIRRO.append(item)
+        mydb.close()
+        return SOLICITACOES4MESBAIRRO
+
 @ns.route('/faixaetariagenero/<regional>')
 @api.param('<regional>')
 class GetFaixaEtariaGenero(Resource):
@@ -21,7 +45,7 @@ class GetFaixaEtariaGenero(Resource):
         query = "SELECT genero, faixa_etaria FROM olap_156.fato_central156 C inner join dim_assunto A inner join dim_genero G inner join dim_Data D inner join dim_faixa_etaria_ibge F inner join dim_regional R where F.FK_Faixa_Etaria_ibge = C.FK_Faixa_Etaria_ibge and C.Fk_genero = G.fk_genero and C.FK_Assunto = A.FK_Assunto and C.FK_Data = D.FK_Data and C.FK_Regional = R.FK_Regional and F.FK_Faixa_Etaria_ibge != 20 and ano = 2021 and R.FK_Regional = '{}'".format(regional)
         df = pd.read_sql(query, mydb)
         gdf = df.groupby(['faixa_etaria','genero']).size().reset_index(name='count')
-        mdf = gdf.sort_values(by='count', ascending=False)
+        mdf = gdf.sort_values(by='count')
         result = mdf.to_json(orient="records")
         parsed = json.loads(result)
         for item in parsed:
@@ -29,6 +53,27 @@ class GetFaixaEtariaGenero(Resource):
         mydb.close()
         return FAIXAS_ETARIAS_GENEROS
 
+@ns.route('/faixaetariagenero/<regional>/<mes>/<ano>')
+@api.param('<regional>')
+@api.param('<mes>')
+@api.param('<ano>')
+class GetFaixaEtariaGenero(Resource):
+    @api.doc('list_faixaEtariaGenero')
+    @api.marshal_list_with(faixa_etaria_genero)
+    def get(self, regional,mes,ano):
+        mydb.connect()
+        FAIXAS_ETARIAS_GENEROS = []
+        query = "SELECT genero, faixa_etaria, mes, ano FROM olap_156.fato_central156 C inner join dim_assunto A inner join dim_genero G inner join dim_Data D inner join dim_faixa_etaria_ibge F inner join dim_regional R where F.FK_Faixa_Etaria_ibge = C.FK_Faixa_Etaria_ibge and C.Fk_genero = G.fk_genero and C.FK_Assunto = A.FK_Assunto and C.FK_Data = D.FK_Data and C.FK_Regional = R.FK_Regional and F.FK_Faixa_Etaria_ibge != 20 and mes = '{}' and ano = '{}' and R.FK_Regional = '{}'".format(mes,ano,regional)
+        df = pd.read_sql(query, mydb)
+        gdf = df.groupby(['faixa_etaria','genero']).size().reset_index(name='count')
+        mdf = gdf.sort_values(by='count')
+        print(mdf)
+        result = mdf.to_json(orient="records")
+        parsed = json.loads(result)
+        for item in parsed:
+            FAIXAS_ETARIAS_GENEROS.append(item)
+        mydb.close()
+        return FAIXAS_ETARIAS_GENEROS
 
 @ns.route('/assuntoBairroMes/<assunto>/<mes>/<ano>')
 @api.param('<assunto>')
@@ -38,13 +83,13 @@ class GetbairroAssunto(Resource):
     @api.marshal_list_with(assuntoBairroMes)
     def get(self, assunto, mes, ano):
         mydb.connect()
-        
         BAIRRO_POR_ASSUNTOS = []
         query = "SELECT T.fk_assunto, assunto, bairro, mes, ano FROM olap_156.fato_central156 C inner join dim_assunto T inner join dim_bairro2 B inner join dim_Data D where C.FK_bairro = B.FK_bairro and C.FK_Assunto = T.FK_Assunto and C.FK_Data = D.FK_Data and C.FK_assunto = '{}' and mes = '{}' and ano = '{}'".format(assunto, mes, ano)
         df = pd.read_sql(query, mydb)
-        gdf = df.groupby(['bairro','assunto','ano']).size().reset_index(name='count')
+        gdf = df.groupby(['bairro','assunto','mes','ano']).size().reset_index(name='count')
         mdf = gdf.sort_values(by='count', ascending=False)
         result = mdf.to_json(orient="records")
+        print(mdf)
         parsed = json.loads(result)
         for item in parsed:
             BAIRRO_POR_ASSUNTOS.append(item)

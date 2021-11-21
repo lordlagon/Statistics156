@@ -99,7 +99,7 @@ function GenerateLineChart(assuntoPorBairro) {
         dateAxis.keepSelection = true;
     });
 }
-function GenerateFourColumnChart(assuntoPorBairro) {
+function GenerateFourColumnChart(assunto) {
     am4core.ready(function () {
 
         // Themes begin
@@ -115,7 +115,7 @@ function GenerateFourColumnChart(assuntoPorBairro) {
         chart.legend.labels.template.maxWidth = 95
 
         var xAxis = chart.xAxes.push(new am4charts.CategoryAxis())
-        xAxis.dataFields.category = 'category'
+        xAxis.dataFields.category = 'mes'
         xAxis.renderer.cellStartLocation = 0.1
         xAxis.renderer.cellEndLocation = 0.9
         xAxis.renderer.grid.template.location = 0;
@@ -126,7 +126,7 @@ function GenerateFourColumnChart(assuntoPorBairro) {
         function createSeries(value, name) {
             var series = chart.series.push(new am4charts.ColumnSeries())
             series.dataFields.valueY = value
-            series.dataFields.categoryX = 'category'
+            series.dataFields.categoryX = 'mes'
             series.name = name
 
             series.events.on("hidden", arrangeColumns);
@@ -134,43 +134,18 @@ function GenerateFourColumnChart(assuntoPorBairro) {
 
             var bullet = series.bullets.push(new am4charts.LabelBullet())
             bullet.interactionsEnabled = false
-            bullet.dy = 30;
+            bullet.dy = 15;
             bullet.label.text = '{valueY}'
             bullet.label.fill = am4core.color('#ffffff')
 
             return series;
         }
 
-        chart.data = [
-            {
-                category: 'Junho',
-                first: 40,
-                second: 55,
-                third: 60
-            },
-            {
-                category: 'Julho',
-                first: 30,
-                second: 78,
-                third: 69
-            },
-            {
-                category: 'Agosto',
-                first: 27,
-                second: 40,
-                third: 45
-            },
-            {
-                category: 'Setembro',
-                first: 50,
-                second: 33,
-                third: 22
-            }
-        ]
+        chart.data = assunto.listaCharts;
 
-        createSeries('first', 'Ahu');
-        createSeries('second', 'Boa Vista');
-        createSeries('third', 'Centro');
+        createSeries('bairro1', assunto.bairro1);
+        createSeries('bairro2', assunto.bairro2);
+        createSeries('bairro3', assunto.bairro3);
 
         function arrangeColumns() {
 
@@ -361,7 +336,7 @@ function GenerateFaixaEtariaChart(faixas_etarias) {
                 "female": 634227
             }
         ];
-
+        usData = faixas_etarias;
         var maleChart = mainContainer.createChild(am4charts.XYChart);
         maleChart.paddingRight = 0;
         maleChart.data = JSON.parse(JSON.stringify(usData));

@@ -1,0 +1,78 @@
+﻿[
+  {
+    "fk_faixa_etaria_ibge": "1",
+    "faixa_etaria": "0 a 4 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "2",
+    "faixa_etaria": "5 a 9 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "3",
+    "faixa_etaria": "10 a 14 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "4",
+    "faixa_etaria": "15 a 19 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "5",
+    "faixa_etaria": "20 a 24 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "6",
+    "faixa_etaria": "25 a 29 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "7",
+    "faixa_etaria": "30 a 34 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "8",
+    "faixa_etaria": "35 a 39 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "9",
+    "faixa_etaria": "40 a 44 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "10",
+    "faixa_etaria": "45 a 49 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "11",
+    "faixa_etaria": "50 a 54 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "12",
+    "faixa_etaria": "55 a 59 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "13",
+    "faixa_etaria": "60 a 64 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "14",
+    "faixa_etaria": "65 a 69 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "15",
+    "faixa_etaria": "70 a 74 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "16",
+    "faixa_etaria": "75 a 79 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "17",
+    "faixa_etaria": "80 a 84 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "18",
+    "faixa_etaria": "85 a 89 anos"
+  },
+  {
+    "fk_faixa_etaria_ibge": "19",
+    "faixa_etaria": "90 ou mais"
+  }
+]

@@ -1,4 +1,4 @@
-﻿@page "/idade"
+﻿@page "/faixaetaria"
 @using Statistics156_Front.Data
 @inject Statistics156_Front.Services.ISelecoesService _selecaoService
 @inject Statistics156_Front.Services.ICentralService _centralService
@@ -23,23 +23,39 @@
                             AllowFiltering="true" Style="width:300px"
                             Placeholder="" Data=@regionais TextProperty="Regional" ValueProperty="Fk_Regional"
                             Change=@(args => OnChangeRegional(args, "regionais")) />
+            <h4 style="font-weight: bold">Mês</h4>
+            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                            Data=@(meses.Select(c => c).Distinct())
+                            Change=@(args => OnChange(args, "mes")) />
+            <h4 style="font-weight: bold">Ano</h4>
+            <RadzenDropDown AllowClear="true" TValue="string" Style="width:300px"
+                            @bind-Value="Ano" Data=@(anos.Select(c => c).Distinct())
+                            Change=@(args => OnChange(args, "ano")) />
             <p><button class="btn btn-primary" @onclick="Filtrar">Filtrar</button></p>
         </div>
     </div>
 </div>
 @code {
+    IEnumerable<string> meses;
+    IEnumerable<string> anos;
     IEnumerable<RegionalSolicitacao> regionais;
     RegionalSolicitacao regionalSelecionada;
+    List<ChartFaixaEtaria> chartFaixaEtaria;
+
+    string Mes = string.Empty;
+    string Ano = "2021";
 
     protected override void OnInitialized()
     {
+        meses = _selecaoService.GetMeses();
+        anos = _selecaoService.GetAnos();
+        chartFaixaEtaria = new List<ChartFaixaEtaria>();
         regionalSelecionada = new RegionalSolicitacao();
         regionais = _selecaoService.GetRegionais() ?? new List<RegionalSolicitacao>();
     }
 
     async Task Filtrar()
     {
-
         await GetAnalise(regionalSelecionada);
     }
     async Task GetAnalise(RegionalSolicitacao regional)
@@ -49,17 +65,43 @@
             ShowNotification(new NotificationMessage() { Summary = "Selecione uma regional" });
             return;
         }
-        await GenerateChartBlazor();
+        if(string.IsNullOrEmpty(Mes) || string.IsNullOrEmpty(Ano))
+            chartFaixaEtaria = await _centralService.GetFaixaEtariaGenero(regionalSelecionada);
+        else
+            chartFaixaEtaria = await _centralService.GetFaixaEtariaGenero(regionalSelecionada, Mes, Ano);
+        if (chartFaixaEtaria != null)
+            await GenerateChartBlazor();
     }
     async Task GenerateChartBlazor()
     {
-        await jsRuntime.InvokeVoidAsync("GenerateFaixaEtariaChart", "");
+        await jsRuntime.InvokeVoidAsync("GenerateFaixaEtariaChart", chartFaixaEtaria);
     }
 
     void OnChangeRegional(object value, string name)
     {
         var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
         regionalSelecionada = regionais.AsQueryable().Where(c => c.Fk_Regional == str as string).FirstOrDefault();
+    }
+
+    void OnChange(object value, string name)
+    {
+
+        var str = value is IEnumerable<object> ? string.Join(", ", (IEnumerable<object>)value) : value;
+        if (str is string valor)
+        {
+            switch (name)
+            {
+                case "ano":
+                    Ano = valor;
+                    break;
+                case "mes":
+                    Mes = valor;
+                    break;
+                default:
+                    break;
+            }
+
+        }
     }
 
     void ShowNotification(NotificationMessage message)

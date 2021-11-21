@@ -12,5 +12,6 @@ namespace Statistics156_Front
         public const string assuntoJson = "C:\\Sistemas\\TCC\\Central156\\Statistics156-Front\\Data\\assuntos.json";
         public const string regionalJson = "C:\\Sistemas\\TCC\\Central156\\Statistics156-Front\\Data\\regionais.json";
         public const string assunto10Json = "C:\\Sistemas\\TCC\\Central156\\Statistics156-Front\\Data\\assuntosTop10.json";
+        public const string faixaEtariaJson= "C:\\Sistemas\\TCC\\Central156\\Statistics156-Front\\Data\\faixasEtarias.json";
     }
 }

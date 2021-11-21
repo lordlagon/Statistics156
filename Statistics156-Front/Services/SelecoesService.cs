@@ -99,8 +99,6 @@ namespace Statistics156_Front.Services
             }
         }
 
-
-
         public async Task<List<RegionalSolicitacao>> GetRegionaisAsync()
         {
             try
@@ -164,18 +162,11 @@ namespace Statistics156_Front.Services
         {
             try
             {
-                var result = await AppConfiguration.BaseUrl
-                    .AppendPathSegment("selecao")
-                    .AppendPathSegment("faixa_etaria")
-                    .GetJsonAsync<List<FaixaEtaria>>();
-                result.Remove(result.FirstOrDefault(w => w.Faixa_etaria == "unknown"));
-
-                return result;
-
+                var faixasEtaria = LoadJson<FaixaEtaria>(AppConfiguration.faixaEtariaJson);
+                return faixasEtaria;
             }
             catch (Exception)
             {
-
                 return null;
             }
         }

@@ -7,5 +7,12 @@
         public string Faixa_etaria { get; set; }
     }
 
+    public class ChartFaixaEtaria
+    {
+        public int Male { get; set; }
+        public int Female { get; set; }
+        public string Faixa_etaria { get; set; }
+    }
+
 
 }
